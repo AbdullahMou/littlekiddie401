@@ -1,5 +1,15 @@
 from tkinter import *
-from PIL import Image, ImageTk
+import json
+import random
+import spacy
+
+# from PIL import Image, ImageTk
+
+paragraphs_list1 = []
+paragraphs_list2 = []
+paragraphs_list3 = []
+paragraphs_list4 = []
+
 class Little(Tk):
     """
     a class to create a container that takes a Frame().
@@ -15,12 +25,15 @@ class Little(Tk):
         container.grid_rowconfigure(0, weight=1)
         container.grid_columnconfigure(0, weight=1)
         self.frames = {}
+
         self.minsize(640,400)
-        for i in (home_page, story_page, guessing_game, song_page):
+        for i in (home_page, story_page1,story_page2,story_page3,story_page4 ,guessing_game, song_page):
             frame = i(container, self)
             self.frames[i] = frame
             frame.grid(row=0, column=0, sticky="nsew")
         self.show_frame(home_page)
+
+
     def show_frame(self, context):
         frame = self.frames[context]
         frame.tkraise()  # switch between pages
@@ -29,25 +42,32 @@ class home_page(Frame):
     a class that creates the home page
     with buttons to navigate through pages(depending on categories)
     """
+
+
+
     def __init__(self, parent, controller):
         Frame.__init__(self, parent)
         title = Label(self, text="Welcome to littleKiddie")
         title.pack(padx=10, pady=10)
-        pick = Label(self, text="To view a story, choose your favorite character:")
+        pick = Label(self, text="To view a story, choose from our categories:")
         pick.pack(padx=10, pady=10)
-        first_category = Button(self, text="Cinderella", command=lambda: controller.show_frame(story_page))
+        first_category = Button(self, text="Collection of our Best", command=lambda: controller.show_frame(story_page1))
         first_category.pack()
-        second_category = Button(self, text="Mickey Mouse", command=lambda: controller.show_frame(story_page))
+
+        second_category = Button(self, text="Funny", command=lambda: controller.show_frame(story_page2))
         second_category.pack()
-        third_category = Button(self, text="Ben Ten", command=lambda: controller.show_frame(story_page))
+        third_category = Button(self, text="Magic", command=lambda: controller.show_frame(story_page3))
         third_category.pack()
-        fourth_category = Button(self, text="Spongebob", command=lambda: controller.show_frame(story_page))
+        fourth_category = Button(self, text="Moral", command=lambda: controller.show_frame(story_page4))
         fourth_category.pack()
         songs_gen = Label(self, text="Or would you like to listen to a song?")
         songs_gen.pack()
         song = Button(self, text="listen", command=lambda: controller.show_frame(song_page))
         song.pack()
-class story_page(Frame):
+
+
+class story_page1(Frame):
+    # paragraphs_list = []
     """
     a class to view each story, taken from categories.
     page content:
@@ -57,16 +77,99 @@ class story_page(Frame):
     + generated randomly from JSON
     - TTS option (Text To Speech) ##
     """
+
     def __init__(self, parent, controller):
         Frame.__init__(self, parent)
-        title = Label(self, text="Story Title")#title needed
-        title.pack(padx=10, pady=10)
-        text = Label(self, text="Story text")
-        text.pack(padx=10, pady=10)
+
+        with open('top10.json') as fp:
+            data = json.load(fp)
+            random_index = random.randint(0, len(data) - 1)
+            title = Label(self ,text = data[random_index]['title'])
+            title.pack()
+            data2 = data[random_index]['pargraph']
+            pargraph = Label(self, text= data2)
+            pargraph.pack()
+
+
+            paragraphs_list1.insert(0,data[random_index]['pargraph'])
+            audio = Label(self, text = data[random_index]['audio'])
+            audio.pack()
+
+
         home = Button(self, text="Go to the home page", command=lambda: controller.show_frame(home_page))
         home.pack()
         game = Button(self, text="Take a guessing game ", command=lambda: controller.show_frame(guessing_game))
         game.pack()
+
+
+class story_page2(Frame):
+    def __init__(self, parent, controller):
+        Frame.__init__(self, parent)
+
+        with open('funny.json') as fp:
+            data = json.load(fp)
+            random_index = random.randint(0, len(data) - 1)
+            title = Label(self, text=data[random_index]['title'])
+            title.pack()
+            pargraph = Label(self, text=data[random_index]['pargraph'])
+            pargraph.pack()
+
+            paragraphs_list2.insert(0,data[random_index]['pargraph'])
+            audio = Label(self, text=data[random_index]['audio'])
+            audio.pack()
+
+        home = Button(self, text="Go to the home page", command=lambda: controller.show_frame(home_page))
+        home.pack()
+        game = Button(self, text="Take a guessing game ", command=lambda: controller.show_frame(guessing_game))
+        game.pack()
+
+class story_page3(Frame):
+
+
+    def __init__(self, parent, controller):
+        Frame.__init__(self, parent)
+
+        with open('magic.json') as fp:
+            data = json.load(fp)
+            random_index = random.randint(0, len(data) - 1)
+            title = Label(self, text=data[random_index]['title'])
+            title.pack()
+            pargraph = Label(self, text=data[random_index]['pargraph'])
+            pargraph.pack()
+
+            paragraphs_list3.insert(0, data[random_index]['pargraph'])
+            audio = Label(self, text=data[random_index]['audio'])
+            audio.pack()
+
+        home = Button(self, text="Go to the home page", command=lambda: controller.show_frame(home_page))
+        home.pack()
+        game = Button(self, text="Take a guessing game ", command=lambda: controller.show_frame(guessing_game))
+        game.pack()
+
+class story_page4(Frame):
+    def __init__(self, parent, controller):
+        Frame.__init__(self, parent)
+
+        with open('big_concept.json') as fp:
+            data = json.load(fp)
+            random_index = random.randint(0, len(data) - 1)
+            title = Label(self, text=data[random_index]['title'])
+            title.pack()
+            pargraph = Label(self, text=data[random_index]['pargraph'])
+            pargraph.pack()
+
+            paragraphs_list4.insert(0, data[random_index]['pargraph'])
+            audio = Label(self, text=data[random_index]['audio'])
+            audio.pack()
+
+        home = Button(self, text="Go to the home page", command=lambda: controller.show_frame(home_page))
+        home.pack()
+        game = Button(self, text="Take a guessing game ", command=lambda: controller.show_frame(guessing_game))
+        game.pack()
+
+
+
+
 class guessing_game(Frame):
     """
     a class to view the game page.
@@ -77,15 +180,32 @@ class guessing_game(Frame):
         label.pack(padx=10, pady=10)
         home = Button(self, text="Go to the home page", command=lambda: controller.show_frame(home_page))
         home.pack()
-        submit = Button(self, text="Submit", command=lambda: controller.show_frame(story_page))
+        submit = Button(self, text="Submit", command=lambda: controller.show_frame(story_page1))
         submit.pack()
+
+        if story_page1:
+            story_in_game = Label(self, text= paragraphs_list1[0])
+            story_in_game.pack()
+
+########
+    def game(self, story):
+        score = 0
+        sp = spacy.load('en_core_web_sm')
+        userInput = Entry(self, 'enter a past tense verb > ')
+        userInput.pack()
+        if spacy.explain(sp(userInput)[0].tag_) == 'verb, past tense' and userInput in story:
+            score += 1
+        score.pack()
+
+
 class song_page(Frame):
     def __init__(self, parent, controller):
         Frame.__init__(self, parent)
-        label = Label(self, text="song title") ##must be a variable
+        label = Label(self, text="song title")
         label.pack(padx=10, pady=10)
         start_page = Button(self, text="Go to the home page", command=lambda: controller.show_frame(home_page))
         start_page.pack()
+
 class File:
     def __init__(self, master):
         menubar = Menu(master)
@@ -93,11 +213,19 @@ class File:
         filemenu.add_command(label="Exit", command=master.quit)
         menubar.add_cascade(label="File", menu=filemenu)
         master.config(menu=menubar)
+        # TKINTER SOURCE CODE: https://www.youtube.com/watch?v=39P4BMvvLdM&ab_channel=IntrotoComputerScience
+
+
+## SPACY STARTS HERE
+
+
+
 if __name__ == '__main__':
     root = Little()
     root.title('Little Kiddie')
-    # load = Image.open('images\\wireframes.jpg')
-    # render = ImageTk.PhotoImage(load)
-    # img = Label(root, image = render)
-    # img.place(x = 0, y= 0)
+    # # load = Image.open('images\\wireframes.jpg')
+    # # render = ImageTk.PhotoImage(load)
+    # # img = Label(root, image = render)
+    # # img.place(x = 0, y= 0)
     root.mainloop()
+
