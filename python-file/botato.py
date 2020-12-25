@@ -2,6 +2,9 @@ from tkinter import *
 import json
 import random
 import spacy
+import vlc
+
+
 
 # from PIL import Image, ImageTk
 
@@ -90,11 +93,13 @@ class story_page1(Frame):
             data2 = data[random_index]['pargraph']
             pargraph = Label(self, text= data2)
             pargraph.pack()
-
-
             paragraphs_list1.insert(0,data[random_index]['pargraph'])
-            audio = Label(self, text = data[random_index]['audio'])
+            p = vlc.MediaPlayer(data[random_index]['audio'])
+            audio = Button(self, text="play audio", command=p.play)
             audio.pack()
+            audio = Button(self, text="stop audio", command=p.stop)
+            audio.pack()
+
 
 
         home = Button(self, text="Go to the home page", command=lambda: controller.show_frame(home_page))
@@ -116,7 +121,10 @@ class story_page2(Frame):
             pargraph.pack()
 
             paragraphs_list2.insert(0,data[random_index]['pargraph'])
-            audio = Label(self, text=data[random_index]['audio'])
+            p = vlc.MediaPlayer(data[random_index]['audio'])
+            audio = Button(self, text="play audio", command=p.play)
+            audio.pack()
+            audio = Button(self, text="stop audio", command=p.stop)
             audio.pack()
 
         home = Button(self, text="Go to the home page", command=lambda: controller.show_frame(home_page))
@@ -139,7 +147,10 @@ class story_page3(Frame):
             pargraph.pack()
 
             paragraphs_list3.insert(0, data[random_index]['pargraph'])
-            audio = Label(self, text=data[random_index]['audio'])
+            p = vlc.MediaPlayer(data[random_index]['audio'])
+            audio = Button(self, text="play audio", command=p.play)
+            audio.pack()
+            audio = Button(self, text="stop audio", command=p.stop)
             audio.pack()
 
         home = Button(self, text="Go to the home page", command=lambda: controller.show_frame(home_page))
@@ -160,7 +171,10 @@ class story_page4(Frame):
             pargraph.pack()
 
             paragraphs_list4.insert(0, data[random_index]['pargraph'])
-            audio = Label(self, text=data[random_index]['audio'])
+            p = vlc.MediaPlayer(data[random_index]['audio'])
+            audio = Button(self, text="play audio", command=p.play)
+            audio.pack()
+            audio = Button(self, text="stop audio", command=p.stop)
             audio.pack()
 
         home = Button(self, text="Go to the home page", command=lambda: controller.show_frame(home_page))
