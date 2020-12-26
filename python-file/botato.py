@@ -2,6 +2,9 @@ from tkinter import *
 import json
 import random
 import spacy
+import vlc
+
+
 
 # from PIL import Image, ImageTk
 
@@ -9,6 +12,7 @@ paragraphs_list1 = []
 paragraphs_list2 = []
 paragraphs_list3 = []
 paragraphs_list4 = []
+
 
 class Little(Tk):
     """
@@ -27,7 +31,7 @@ class Little(Tk):
         self.frames = {}
 
         self.minsize(640,400)
-        for i in (home_page, story_page1,story_page2,story_page3,story_page4 ,guessing_game, song_page):
+        for i in (home_page, story_page1,story_page2,story_page3,story_page4 ,guessing_game1,guessing_game2,guessing_game3,guessing_game4, song_page):
             frame = i(container, self)
             self.frames[i] = frame
             frame.grid(row=0, column=0, sticky="nsew")
@@ -81,7 +85,7 @@ class story_page1(Frame):
     def __init__(self, parent, controller):
         Frame.__init__(self, parent)
 
-        with open('top10.json') as fp:
+        with open('../json/top10.json') as fp:
             data = json.load(fp)
             random_index = random.randint(0, len(data) - 1)
             title = Label(self ,text = data[random_index]['title'])
@@ -89,16 +93,18 @@ class story_page1(Frame):
             data2 = data[random_index]['pargraph']
             pargraph = Label(self, text= data2)
             pargraph.pack()
-
-
             paragraphs_list1.insert(0,data[random_index]['pargraph'])
-            audio = Label(self, text = data[random_index]['audio'])
+            p = vlc.MediaPlayer(data[random_index]['audio'])
+            audio = Button(self, text="play audio", command=p.play)
             audio.pack()
+            audio = Button(self, text="stop audio", command=p.stop)
+            audio.pack()
+
 
 
         home = Button(self, text="Go to the home page", command=lambda: controller.show_frame(home_page))
         home.pack()
-        game = Button(self, text="Take a guessing game ", command=lambda: controller.show_frame(guessing_game))
+        game = Button(self, text="Take a guessing game ", command=lambda: controller.show_frame(guessing_game1))
         game.pack()
 
 
@@ -106,7 +112,7 @@ class story_page2(Frame):
     def __init__(self, parent, controller):
         Frame.__init__(self, parent)
 
-        with open('funny.json') as fp:
+        with open('../json/funny.json') as fp:
             data = json.load(fp)
             random_index = random.randint(0, len(data) - 1)
             title = Label(self, text=data[random_index]['title'])
@@ -115,12 +121,15 @@ class story_page2(Frame):
             pargraph.pack()
 
             paragraphs_list2.insert(0,data[random_index]['pargraph'])
-            audio = Label(self, text=data[random_index]['audio'])
+            p = vlc.MediaPlayer(data[random_index]['audio'])
+            audio = Button(self, text="play audio", command=p.play)
+            audio.pack()
+            audio = Button(self, text="stop audio", command=p.stop)
             audio.pack()
 
         home = Button(self, text="Go to the home page", command=lambda: controller.show_frame(home_page))
         home.pack()
-        game = Button(self, text="Take a guessing game ", command=lambda: controller.show_frame(guessing_game))
+        game = Button(self, text="Take a guessing game ", command=lambda: controller.show_frame(guessing_game2))
         game.pack()
 
 class story_page3(Frame):
@@ -129,7 +138,7 @@ class story_page3(Frame):
     def __init__(self, parent, controller):
         Frame.__init__(self, parent)
 
-        with open('magic.json') as fp:
+        with open('../json/magic.json') as fp:
             data = json.load(fp)
             random_index = random.randint(0, len(data) - 1)
             title = Label(self, text=data[random_index]['title'])
@@ -138,19 +147,22 @@ class story_page3(Frame):
             pargraph.pack()
 
             paragraphs_list3.insert(0, data[random_index]['pargraph'])
-            audio = Label(self, text=data[random_index]['audio'])
+            p = vlc.MediaPlayer(data[random_index]['audio'])
+            audio = Button(self, text="play audio", command=p.play)
+            audio.pack()
+            audio = Button(self, text="stop audio", command=p.stop)
             audio.pack()
 
         home = Button(self, text="Go to the home page", command=lambda: controller.show_frame(home_page))
         home.pack()
-        game = Button(self, text="Take a guessing game ", command=lambda: controller.show_frame(guessing_game))
+        game = Button(self, text="Take a guessing game ", command=lambda: controller.show_frame(guessing_game3))
         game.pack()
 
 class story_page4(Frame):
     def __init__(self, parent, controller):
         Frame.__init__(self, parent)
 
-        with open('big_concept.json') as fp:
+        with open('../json/big_concept.json') as fp:
             data = json.load(fp)
             random_index = random.randint(0, len(data) - 1)
             title = Label(self, text=data[random_index]['title'])
@@ -159,18 +171,21 @@ class story_page4(Frame):
             pargraph.pack()
 
             paragraphs_list4.insert(0, data[random_index]['pargraph'])
-            audio = Label(self, text=data[random_index]['audio'])
+            p = vlc.MediaPlayer(data[random_index]['audio'])
+            audio = Button(self, text="play audio", command=p.play)
+            audio.pack()
+            audio = Button(self, text="stop audio", command=p.stop)
             audio.pack()
 
         home = Button(self, text="Go to the home page", command=lambda: controller.show_frame(home_page))
         home.pack()
-        game = Button(self, text="Take a guessing game ", command=lambda: controller.show_frame(guessing_game))
+        game = Button(self, text="Take a guessing game ", command=lambda: controller.show_frame(guessing_game4))
         game.pack()
 
 
 
 
-class guessing_game(Frame):
+class guessing_game1(Frame):
     """
     a class to view the game page.
     """
@@ -183,9 +198,9 @@ class guessing_game(Frame):
         submit = Button(self, text="Submit", command=lambda: controller.show_frame(story_page1))
         submit.pack()
 
-        if story_page1:
-            story_in_game = Label(self, text= paragraphs_list1[0])
-            story_in_game.pack()
+
+        story_in_game = Label(self, text= paragraphs_list1[0])
+        story_in_game.pack()
 
 ########
     def game(self, story):
@@ -197,6 +212,56 @@ class guessing_game(Frame):
             score += 1
         score.pack()
 
+class guessing_game2(Frame):
+    """
+    a class to view the game page.
+    """
+    def __init__(self, parent, controller):
+        Frame.__init__(self, parent)
+        label = Label(self, text="Page Two")
+        label.pack(padx=10, pady=10)
+        home = Button(self, text="Go to the home page", command=lambda: controller.show_frame(home_page))
+        home.pack()
+        submit = Button(self, text="Submit", command=lambda: controller.show_frame(story_page1))
+        submit.pack()
+
+
+        story_in_game = Label(self, text= paragraphs_list2[0])
+        story_in_game.pack()
+
+class guessing_game3(Frame):
+    """
+    a class to view the game page.
+    """
+    def __init__(self, parent, controller):
+        Frame.__init__(self, parent)
+        label = Label(self, text="Page Two")
+        label.pack(padx=10, pady=10)
+        home = Button(self, text="Go to the home page", command=lambda: controller.show_frame(home_page))
+        home.pack()
+        submit = Button(self, text="Submit", command=lambda: controller.show_frame(story_page1))
+        submit.pack()
+
+
+        story_in_game = Label(self, text= paragraphs_list3[0])
+        story_in_game.pack()
+
+class guessing_game4(Frame):
+    """
+    a class to view the game page.
+    """
+    def __init__(self, parent, controller):
+        Frame.__init__(self, parent)
+        label = Label(self, text="Page Two")
+        label.pack(padx=10, pady=10)
+        home = Button(self, text="Go to the home page", command=lambda: controller.show_frame(home_page))
+        home.pack()
+        submit = Button(self, text="Submit", command=lambda: controller.show_frame(story_page1))
+        submit.pack()
+
+
+        story_in_game = Label(self, text= paragraphs_list4[0])
+        story_in_game.pack()
 
 class song_page(Frame):
     def __init__(self, parent, controller):
@@ -228,5 +293,3 @@ if __name__ == '__main__':
     # # img = Label(root, image = render)
     # # img.place(x = 0, y= 0)
     root.mainloop()
-
-
