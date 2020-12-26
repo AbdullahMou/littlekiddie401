@@ -3,7 +3,10 @@ import json
 import random
 import spacy
 import vlc
-
+from tkinter import messagebox
+from PyDictionary import PyDictionary
+dictionary=PyDictionary()
+sp = spacy.load('en_core_web_sm')
 
 
 # from PIL import Image, ImageTk
@@ -189,29 +192,56 @@ class guessing_game1(Frame):
     """
     a class to view the game page.
     """
+
     def __init__(self, parent, controller):
         Frame.__init__(self, parent)
+        adjectives = []
         label = Label(self, text="Page Two")
         label.pack(padx=10, pady=10)
         home = Button(self, text="Go to the home page", command=lambda: controller.show_frame(home_page))
         home.pack()
-        submit = Button(self, text="Submit", command=lambda: controller.show_frame(story_page1))
-        submit.pack()
-
-
         story_in_game = Label(self, text= paragraphs_list1[0])
         story_in_game.pack()
+        for i in paragraphs_list1[0].split():
+            if spacy.explain(sp(i.lower())[0].tag_) == 'adjective':
+                adjectives.append(i)
+        random_adjective = random.choice(adjectives)
 
 ########
-    def game(self, story):
+        global score
         score = 0
-        sp = spacy.load('en_core_web_sm')
-        userInput = Entry(self, 'enter a past tense verb > ')
-        userInput.pack()
-        if spacy.explain(sp(userInput)[0].tag_) == 'verb, past tense' and userInput in story:
-            score += 1
-        score.pack()
-
+        ###########QUESTION1##############
+        question1=Label(self,text= 'Q1: Enter a past tense verb from the above story')
+        question1.pack()
+        enter_question1 = Entry(self)
+        enter_question1.pack()
+        ###########QUESTION2##############
+        question2 = Label(self, text='Q2: Enter a personal pronoun from the above story')
+        question2.pack()
+        enter_question2 = Entry(self)
+        enter_question2.pack()
+        ###########QUESTION3##############
+        question3 = Label(self, text=f'Q3: What is the meaning of {random_adjective}?')
+        question3.pack()
+        enter_question3 = Entry(self)
+        enter_question3.pack()
+        synonyms_list=dictionary.synonym(random_adjective)
+        def pop_up():
+            global score
+            user_input_question1 = enter_question1.get()
+            user_input_question2 = enter_question2.get()
+            user_input_question3 = enter_question3.get()
+            if spacy.explain(sp(user_input_question1.lower())[0].tag_)== 'verb, past tense' and user_input_question1 in paragraphs_list1[0]:
+                print('hi')
+                score += 1
+            if spacy.explain(sp(user_input_question2.lower())[0].tag_)== 'pronoun, personal' and user_input_question2 in paragraphs_list1[0]:
+                print('hello')
+                score += 1
+            if user_input_question3 in synonyms_list :
+                score += 1
+            messagebox.showinfo('Result',f'Your score is {str(score)}. Thanks for playing.')
+        submit = Button(self, text="Submit", command=pop_up)
+        submit.pack()
 class guessing_game2(Frame):
     """
     a class to view the game page.
