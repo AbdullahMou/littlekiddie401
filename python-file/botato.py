@@ -5,6 +5,8 @@ import spacy
 import vlc
 from tkinter import messagebox
 from PyDictionary import PyDictionary
+import inflect
+import string
 dictionary=PyDictionary()
 sp = spacy.load('en_core_web_sm')
 
@@ -196,6 +198,7 @@ class guessing_game1(Frame):
     def __init__(self, parent, controller):
         Frame.__init__(self, parent)
         adjectives = []
+        nouns = []
         label = Label(self, text="Page Two")
         label.pack(padx=10, pady=10)
         home = Button(self, text="Go to the home page", command=lambda: controller.show_frame(home_page))
@@ -205,7 +208,15 @@ class guessing_game1(Frame):
         for i in paragraphs_list1[0].split():
             if spacy.explain(sp(i.lower())[0].tag_) == 'adjective':
                 adjectives.append(i)
-        random_adjective = random.choice(adjectives)
+        random_adjective = random.choice(adjectives).translate(str.maketrans('', '', string.punctuation))
+
+        random_adjective2 = random.choice(adjectives)
+
+        for i in paragraphs_list1[0].split():
+            if spacy.explain(sp(i.lower())[0].tag_) == 'noun, plural':
+                nouns.append(i)
+        random_noun = random.choice(nouns).translate(str.maketrans('', '', string.punctuation))
+
 
 ########
         global score
@@ -226,19 +237,57 @@ class guessing_game1(Frame):
         enter_question3 = Entry(self)
         enter_question3.pack()
         synonyms_list=dictionary.synonym(random_adjective)
+        random_synonym= random.choice(synonyms_list)
+        ###########QUESTION4##############
+        question4 = Label(self, text=f'Q4: What is the opposite of {random_adjective2}?')
+        question4.pack()
+        antonym_list=dictionary.antonym(random_adjective2)
+        random_antonym = random.choice(antonym_list).translate(str.maketrans('', '', string.punctuation))
+        m = IntVar()
+        option1 = Radiobutton(self, text=f'(a){random_antonym}', variable= m, value= 1)
+        option1.pack()
+        option2 = Radiobutton(self, text=f'(b){random_synonym}', variable= m, value= 2)
+        option2.pack()
+
+        ############QUESTION5##############
+
+        question5 = Label(self, text=f'Q3: What is the singular noun of {random_noun}?')
+        question5.pack()
+        enter_question5 = Entry(self)
+        enter_question5.pack()
+        # noun_list=dictionary.singular(random_adjective2)
+        # random_antonym = random.choice(antonym_list)
+        p = inflect.engine()
+
         def pop_up():
             global score
             user_input_question1 = enter_question1.get()
             user_input_question2 = enter_question2.get()
             user_input_question3 = enter_question3.get()
+            user_input_question4 = m.get()
+            user_input_question5 = enter_question5.get()
             if spacy.explain(sp(user_input_question1.lower())[0].tag_)== 'verb, past tense' and user_input_question1 in paragraphs_list1[0]:
                 print('hi')
                 score += 1
+            else:
+                print('wrong1')
             if spacy.explain(sp(user_input_question2.lower())[0].tag_)== 'pronoun, personal' and user_input_question2 in paragraphs_list1[0]:
                 print('hello')
                 score += 1
+            else:
+                print('wrong2')
             if user_input_question3 in synonyms_list :
                 score += 1
+            else:
+                print('wrong3')
+            if user_input_question4 ==  1 :
+                score += 1
+            else:
+                print('wrong4')
+            if user_input_question5 == p.singular_noun(random_noun):
+                score += 1
+            else:
+                print('wrong5')
             messagebox.showinfo('Result',f'Your score is {str(score)}. Thanks for playing.')
         submit = Button(self, text="Submit", command=pop_up)
         submit.pack()
@@ -248,51 +297,307 @@ class guessing_game2(Frame):
     """
     def __init__(self, parent, controller):
         Frame.__init__(self, parent)
+        adjectives = []
+        nouns = []
         label = Label(self, text="Page Two")
         label.pack(padx=10, pady=10)
         home = Button(self, text="Go to the home page", command=lambda: controller.show_frame(home_page))
         home.pack()
-        submit = Button(self, text="Submit", command=lambda: controller.show_frame(story_page1))
-        submit.pack()
-
-
-        story_in_game = Label(self, text= paragraphs_list2[0])
+        story_in_game = Label(self, text=paragraphs_list2[0])
         story_in_game.pack()
+        for i in paragraphs_list2[0].split():
+            if spacy.explain(sp(i.lower())[0].tag_) == 'adjective':
+                adjectives.append(i)
+        random_adjective = random.choice(adjectives).translate(str.maketrans('', '', string.punctuation))
+
+        random_adjective2 = random.choice(adjectives)
+
+        for i in paragraphs_list2[0].split():
+            if spacy.explain(sp(i.lower())[0].tag_) == 'noun, plural':
+                nouns.append(i)
+        random_noun = random.choice(nouns).translate(str.maketrans('', '', string.punctuation))
+
+        ########
+        global score
+        score = 0
+        ###########QUESTION1##############
+        question1 = Label(self, text='Q1: Enter a past tense verb from the above story')
+        question1.pack()
+        enter_question1 = Entry(self)
+        enter_question1.pack()
+        ###########QUESTION2##############
+        question2 = Label(self, text='Q2: Enter a personal pronoun from the above story')
+        question2.pack()
+        enter_question2 = Entry(self)
+        enter_question2.pack()
+        ###########QUESTION3##############
+        question3 = Label(self, text=f'Q3: What is the meaning of {random_adjective}?')
+        question3.pack()
+        enter_question3 = Entry(self)
+        enter_question3.pack()
+        synonyms_list = dictionary.synonym(random_adjective)
+        random_synonym = random.choice(synonyms_list)
+        ###########QUESTION4##############
+        question4 = Label(self, text=f'Q4: What is the opposite of {random_adjective2}?')
+        question4.pack()
+        antonym_list = dictionary.antonym(random_adjective2)
+        random_antonym = random.choice(antonym_list).translate(str.maketrans('', '', string.punctuation))
+        m = IntVar()
+        option1 = Radiobutton(self, text=f'(a){random_antonym}', variable=m, value=1)
+        option1.pack()
+        option2 = Radiobutton(self, text=f'(b){random_synonym}', variable=m, value=2)
+        option2.pack()
+
+        ############QUESTION5##############
+
+        question5 = Label(self, text=f'Q3: What is the singular noun of {random_noun}?')
+        question5.pack()
+        enter_question5 = Entry(self)
+        enter_question5.pack()
+        # noun_list=dictionary.singular(random_adjective2)
+        # random_antonym = random.choice(antonym_list)
+        p = inflect.engine()
+
+        def pop_up():
+            global score
+            user_input_question1 = enter_question1.get()
+            user_input_question2 = enter_question2.get()
+            user_input_question3 = enter_question3.get()
+            user_input_question4 = m.get()
+            user_input_question5 = enter_question5.get()
+            if spacy.explain(sp(user_input_question1.lower())[0].tag_) == 'verb, past tense' and user_input_question1 in \
+                    paragraphs_list2[0]:
+                print('hi')
+                score += 1
+            else:
+                print('wrong1')
+            if spacy.explain(
+                    sp(user_input_question2.lower())[0].tag_) == 'pronoun, personal' and user_input_question2 in \
+                    paragraphs_list2[0]:
+                print('hello')
+                score += 1
+            else:
+                print('wrong2')
+            if user_input_question3 in synonyms_list:
+                score += 1
+            else:
+                print('wrong3')
+            if user_input_question4 == 1:
+                score += 1
+            else:
+                print('wrong4')
+            if user_input_question5 == p.singular_noun(random_noun):
+                score += 1
+            else:
+                print('wrong5')
+            messagebox.showinfo('Result', f'Your score is {str(score)}. Thanks for playing.')
+
+        submit = Button(self, text="Submit", command=pop_up)
+        submit.pack()
 
 class guessing_game3(Frame):
     """
     a class to view the game page.
     """
+
     def __init__(self, parent, controller):
         Frame.__init__(self, parent)
+        adjectives = []
+        nouns = []
         label = Label(self, text="Page Two")
         label.pack(padx=10, pady=10)
         home = Button(self, text="Go to the home page", command=lambda: controller.show_frame(home_page))
         home.pack()
-        submit = Button(self, text="Submit", command=lambda: controller.show_frame(story_page1))
-        submit.pack()
-
-
-        story_in_game = Label(self, text= paragraphs_list3[0])
+        story_in_game = Label(self, text=paragraphs_list3[0])
         story_in_game.pack()
+        for i in paragraphs_list3[0].split():
+            if spacy.explain(sp(i.lower())[0].tag_) == 'adjective':
+                adjectives.append(i)
+        random_adjective = random.choice(adjectives).translate(str.maketrans('', '', string.punctuation))
+
+        random_adjective2 = random.choice(adjectives)
+
+        for i in paragraphs_list3[0].split():
+            if spacy.explain(sp(i.lower())[0].tag_) == 'noun, plural':
+                nouns.append(i)
+        random_noun = random.choice(nouns).translate(str.maketrans('', '', string.punctuation))
+
+        ########
+        global score
+        score = 0
+        ###########QUESTION1##############
+        question1 = Label(self, text='Q1: Enter a past tense verb from the above story')
+        question1.pack()
+        enter_question1 = Entry(self)
+        enter_question1.pack()
+        ###########QUESTION2##############
+        question2 = Label(self, text='Q2: Enter a personal pronoun from the above story')
+        question2.pack()
+        enter_question2 = Entry(self)
+        enter_question2.pack()
+        ###########QUESTION3##############
+        question3 = Label(self, text=f'Q3: What is the meaning of {random_adjective}?')
+        question3.pack()
+        enter_question3 = Entry(self)
+        enter_question3.pack()
+        synonyms_list = dictionary.synonym(random_adjective)
+        random_synonym = random.choice(synonyms_list)
+        ###########QUESTION4##############
+        question4 = Label(self, text=f'Q4: What is the opposite of {random_adjective2}?')
+        question4.pack()
+        antonym_list = dictionary.antonym(random_adjective2)
+        random_antonym = random.choice(antonym_list).translate(str.maketrans('', '', string.punctuation))
+        m = IntVar()
+        option1 = Radiobutton(self, text=f'(a){random_antonym}', variable=m, value=1)
+        option1.pack()
+        option2 = Radiobutton(self, text=f'(b){random_synonym}', variable=m, value=2)
+        option2.pack()
+
+        ############QUESTION5##############
+
+        question5 = Label(self, text=f'Q3: What is the singular noun of {random_noun}?')
+        question5.pack()
+        enter_question5 = Entry(self)
+        enter_question5.pack()
+        # noun_list=dictionary.singular(random_adjective2)
+        # random_antonym = random.choice(antonym_list)
+        p = inflect.engine()
+
+        def pop_up():
+            global score
+            user_input_question1 = enter_question1.get()
+            user_input_question2 = enter_question2.get()
+            user_input_question3 = enter_question3.get()
+            user_input_question4 = m.get()
+            user_input_question5 = enter_question5.get()
+            if spacy.explain(sp(user_input_question1.lower())[0].tag_) == 'verb, past tense' and user_input_question1 in paragraphs_list3[0]:
+                print('hi')
+                score += 1
+            else:
+                print('wrong1')
+            if spacy.explain(sp(user_input_question2.lower())[0].tag_) == 'pronoun, personal' and user_input_question2 in paragraphs_list3[0]:
+                print('hello')
+                score += 1
+            else:
+                print('wrong2')
+            if user_input_question3 in synonyms_list:
+                score += 1
+            else:
+                print('wrong3')
+            if user_input_question4 == 1:
+                score += 1
+            else:
+                print('wrong4')
+            if user_input_question5 == p.singular_noun(random_noun):
+                score += 1
+            else:
+                print('wrong5')
+            messagebox.showinfo('Result', f'Your score is {str(score)}. Thanks for playing.')
+
+        submit = Button(self, text="Submit", command=pop_up)
+        submit.pack()
 
 class guessing_game4(Frame):
     """
     a class to view the game page.
     """
+
     def __init__(self, parent, controller):
         Frame.__init__(self, parent)
+        adjectives = []
+        nouns = []
         label = Label(self, text="Page Two")
         label.pack(padx=10, pady=10)
         home = Button(self, text="Go to the home page", command=lambda: controller.show_frame(home_page))
         home.pack()
-        submit = Button(self, text="Submit", command=lambda: controller.show_frame(story_page1))
-        submit.pack()
-
-
-        story_in_game = Label(self, text= paragraphs_list4[0])
+        story_in_game = Label(self, text=paragraphs_list4[0])
         story_in_game.pack()
+        for i in paragraphs_list4[0].split():
+            if spacy.explain(sp(i.lower())[0].tag_) == 'adjective':
+                adjectives.append(i)
+        random_adjective = random.choice(adjectives).translate(str.maketrans('', '', string.punctuation))
 
+        random_adjective2 = random.choice(adjectives)
+
+        for i in paragraphs_list4[0].split():
+            if spacy.explain(sp(i.lower())[0].tag_) == 'noun, plural':
+                nouns.append(i)
+        random_noun = random.choice(nouns).translate(str.maketrans('', '', string.punctuation))
+
+        ########
+        global score
+        score = 0
+        ###########QUESTION1##############
+        question1 = Label(self, text='Q1: Enter a past tense verb from the above story')
+        question1.pack()
+        enter_question1 = Entry(self)
+        enter_question1.pack()
+        ###########QUESTION2##############
+        question2 = Label(self, text='Q2: Enter a personal pronoun from the above story')
+        question2.pack()
+        enter_question2 = Entry(self)
+        enter_question2.pack()
+        ###########QUESTION3##############
+        question3 = Label(self, text=f'Q3: What is the meaning of {random_adjective}?')
+        question3.pack()
+        enter_question3 = Entry(self)
+        enter_question3.pack()
+        synonyms_list = dictionary.synonym(random_adjective)
+        random_synonym = random.choice(synonyms_list)
+        ###########QUESTION4##############
+        question4 = Label(self, text=f'Q4: What is the opposite of {random_adjective2}?')
+        question4.pack()
+        antonym_list = dictionary.antonym(random_adjective2)
+        random_antonym = random.choice(antonym_list).translate(str.maketrans('', '', string.punctuation))
+        m = IntVar()
+        option1 = Radiobutton(self, text=f'(a){random_antonym}', variable=m, value=1)
+        option1.pack()
+        option2 = Radiobutton(self, text=f'(b){random_synonym}', variable=m, value=2)
+        option2.pack()
+
+        ############QUESTION5##############
+
+        question5 = Label(self, text=f'Q3: What is the singular noun of {random_noun}?')
+        question5.pack()
+        enter_question5 = Entry(self)
+        enter_question5.pack()
+        # noun_list=dictionary.singular(random_adjective2)
+        # random_antonym = random.choice(antonym_list)
+        p = inflect.engine()
+
+        def pop_up():
+            global score
+            user_input_question1 = enter_question1.get()
+            user_input_question2 = enter_question2.get()
+            user_input_question3 = enter_question3.get()
+            user_input_question4 = m.get()
+            user_input_question5 = enter_question5.get()
+            if spacy.explain(sp(user_input_question1.lower())[0].tag_) == 'verb, past tense' and user_input_question1 in paragraphs_list4[0]:
+                print('hi')
+                score += 1
+            else:
+                print('wrong1')
+            if spacy.explain(sp(user_input_question2.lower())[0].tag_) == 'pronoun, personal' and user_input_question2 in paragraphs_list4[0]:
+                print('hello')
+                score += 1
+            else:
+                print('wrong2')
+            if user_input_question3 in synonyms_list:
+                score += 1
+            else:
+                print('wrong3')
+            if user_input_question4 == 1:
+                score += 1
+            else:
+                print('wrong4')
+            if user_input_question5 == p.singular_noun(random_noun):
+                score += 1
+            else:
+                print('wrong5')
+            messagebox.showinfo('Result', f'Your score is {str(score)}. Thanks for playing.')
+
+        submit = Button(self, text="Submit", command=pop_up)
+        submit.pack()
 class song_page(Frame):
     def __init__(self, parent, controller):
         Frame.__init__(self, parent)
