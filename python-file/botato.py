@@ -7,6 +7,7 @@ from tkinter import messagebox
 from PyDictionary import PyDictionary
 import inflect
 import string
+import pyttsx3
 dictionary=PyDictionary()
 sp = spacy.load('en_core_web_sm')
 
@@ -187,7 +188,14 @@ class story_page4(Frame):
         game = Button(self, text="Take a guessing game ", command=lambda: controller.show_frame(guessing_game4))
         game.pack()
 
-
+def tts(sentence):
+    engine = pyttsx3.init()
+    rate = engine.getProperty('rate')  # getting details of current speaking rate
+    engine.setProperty('rate', 130)
+    voices = engine.getProperty('voices')  # getting details of current voice
+    engine.setProperty('voice', voices[1].id)
+    engine.say(sentence)
+    engine.runAndWait()
 
 
 class guessing_game1(Frame):
@@ -222,16 +230,25 @@ class guessing_game1(Frame):
         global score
         score = 0
         ###########QUESTION1##############
+        sentence1 = ' question number 1 : Enter a past tense verb from the above story'
+        q1 = Button(self, text="play audio", command=lambda: tts(sentence1))
+        q1.pack()
         question1=Label(self,text= 'Q1: Enter a past tense verb from the above story')
         question1.pack()
         enter_question1 = Entry(self)
         enter_question1.pack()
         ###########QUESTION2##############
+        sentence2 = 'question number 2 : Enter a personal pronoun from the above story'
+        q2 = Button(self, text="play audio", command=lambda: tts(sentence2))
+        q2.pack()
         question2 = Label(self, text='Q2: Enter a personal pronoun from the above story')
         question2.pack()
         enter_question2 = Entry(self)
         enter_question2.pack()
         ###########QUESTION3##############
+        sentence3 = f'question number 3 : What is the meaning of {random_adjective}?'
+        q3 = Button(self, text="play audio", command=lambda: tts(sentence3))
+        q3.pack()
         question3 = Label(self, text=f'Q3: What is the meaning of {random_adjective}?')
         question3.pack()
         enter_question3 = Entry(self)
@@ -239,6 +256,9 @@ class guessing_game1(Frame):
         synonyms_list=dictionary.synonym(random_adjective)
         random_synonym= random.choice(synonyms_list)
         ###########QUESTION4##############
+        sentence4 = f'question number 4 : What is the opposite of {random_adjective2}?'
+        q4 = Button(self, text="play audio", command=lambda: tts(sentence4))
+        q4.pack()
         question4 = Label(self, text=f'Q4: What is the opposite of {random_adjective2}?')
         question4.pack()
         antonym_list=dictionary.antonym(random_adjective2)
@@ -250,7 +270,9 @@ class guessing_game1(Frame):
         option2.pack()
 
         ############QUESTION5##############
-
+        sentence5 = f'question number 5 : What is the singular noun of {random_noun}?'
+        q5 = Button(self, text="play audio", command=lambda: tts(sentence5))
+        q5.pack()
         question5 = Label(self, text=f'Q3: What is the singular noun of {random_noun}?')
         question5.pack()
         enter_question5 = Entry(self)
@@ -321,24 +343,36 @@ class guessing_game2(Frame):
         global score
         score = 0
         ###########QUESTION1##############
-        question1 = Label(self, text='Q1: Enter a past tense verb from the above story')
+        sentence1 = ' question number 1 : Enter a past tense verb from the above story'
+        q1 = Button(self, text="play audio", command=lambda: tts(sentence1))
+        q1.pack()
+        question1 = Label(self, text=' Enter a past tense verb from the above story')
         question1.pack()
         enter_question1 = Entry(self)
         enter_question1.pack()
         ###########QUESTION2##############
-        question2 = Label(self, text='Q2: Enter a personal pronoun from the above story')
+        sentence2 = 'question number 2 : Enter a personal pronoun from the above story'
+        q2 = Button(self, text="play audio", command=lambda: tts(sentence2))
+        q2.pack()
+        question2 = Label(self, text=' Enter a personal pronoun from the above story')
         question2.pack()
         enter_question2 = Entry(self)
         enter_question2.pack()
         ###########QUESTION3##############
-        question3 = Label(self, text=f'Q3: What is the meaning of {random_adjective}?')
+        sentence3 = f'question number 3 : What is the meaning of {random_adjective}?'
+        q3 = Button(self, text="play audio", command=lambda: tts(sentence3))
+        q3.pack()
+        question3 = Label(self, text=f' What is the meaning of {random_adjective}?')
         question3.pack()
         enter_question3 = Entry(self)
         enter_question3.pack()
         synonyms_list = dictionary.synonym(random_adjective)
         random_synonym = random.choice(synonyms_list)
         ###########QUESTION4##############
-        question4 = Label(self, text=f'Q4: What is the opposite of {random_adjective2}?')
+        sentence4 = f'question number 4 : What is the opposite of {random_adjective2}?'
+        q4 = Button(self, text="play audio", command=lambda: tts(sentence4))
+        q4.pack()
+        question4 = Label(self, text=f' What is the opposite of {random_adjective2}?')
         question4.pack()
         antonym_list = dictionary.antonym(random_adjective2)
         random_antonym = random.choice(antonym_list).translate(str.maketrans('', '', string.punctuation))
@@ -349,7 +383,9 @@ class guessing_game2(Frame):
         option2.pack()
 
         ############QUESTION5##############
-
+        sentence5 = f'question number 5 : What is the singular noun of {random_noun}?'
+        q5 = Button(self, text="play audio", command=lambda: tts(sentence5))
+        q5.pack()
         question5 = Label(self, text=f'Q3: What is the singular noun of {random_noun}?')
         question5.pack()
         enter_question5 = Entry(self)
@@ -426,24 +462,36 @@ class guessing_game3(Frame):
         global score
         score = 0
         ###########QUESTION1##############
-        question1 = Label(self, text='Q1: Enter a past tense verb from the above story')
+        sentence1 = ' question number 1 : Enter a past tense verb from the above story'
+        q1 = Button(self, text="play audio", command=lambda: tts(sentence1))
+        q1.pack()
+        question1 = Label(self, text='Enter a past tense verb from the above story')
         question1.pack()
         enter_question1 = Entry(self)
         enter_question1.pack()
         ###########QUESTION2##############
-        question2 = Label(self, text='Q2: Enter a personal pronoun from the above story')
+        sentence2 = 'question number 2 : Enter a personal pronoun from the above story'
+        q2 = Button(self, text="play audio", command=lambda: tts(sentence2))
+        q2.pack()
+        question2 = Label(self, text='Enter a personal pronoun from the above story')
         question2.pack()
         enter_question2 = Entry(self)
         enter_question2.pack()
         ###########QUESTION3##############
-        question3 = Label(self, text=f'Q3: What is the meaning of {random_adjective}?')
+        sentence3 = f'question number 3 : What is the meaning of {random_adjective}?'
+        q3 = Button(self, text="play audio", command=lambda: tts(sentence3))
+        q3.pack()
+        question3 = Label(self, text=f'What is the meaning of {random_adjective}?')
         question3.pack()
         enter_question3 = Entry(self)
         enter_question3.pack()
         synonyms_list = dictionary.synonym(random_adjective)
         random_synonym = random.choice(synonyms_list)
         ###########QUESTION4##############
-        question4 = Label(self, text=f'Q4: What is the opposite of {random_adjective2}?')
+        sentence4 = f'question number 4 : What is the opposite of {random_adjective2}?'
+        q4 = Button(self, text="play audio", command=lambda: tts(sentence4))
+        q4.pack()
+        question4 = Label(self, text=f'What is the opposite of {random_adjective2}?')
         question4.pack()
         antonym_list = dictionary.antonym(random_adjective2)
         random_antonym = random.choice(antonym_list).translate(str.maketrans('', '', string.punctuation))
@@ -454,8 +502,10 @@ class guessing_game3(Frame):
         option2.pack()
 
         ############QUESTION5##############
-
-        question5 = Label(self, text=f'Q3: What is the singular noun of {random_noun}?')
+        sentence5 = f'question number 5 : What is the singular noun of {random_noun}?'
+        q5 = Button(self, text="play audio", command=lambda: tts(sentence5))
+        q5.pack()
+        question5 = Label(self, text=f' What is the singular noun of {random_noun}?')
         question5.pack()
         enter_question5 = Entry(self)
         enter_question5.pack()
@@ -528,24 +578,36 @@ class guessing_game4(Frame):
         global score
         score = 0
         ###########QUESTION1##############
-        question1 = Label(self, text='Q1: Enter a past tense verb from the above story')
+        sentence1 = ' question number 1 : Enter a past tense verb from the above story'
+        q1 = Button(self, text="play audio", command=lambda: tts(sentence1))
+        q1.pack()
+        question1 = Label(self, text='Enter a past tense verb from the above story')
         question1.pack()
         enter_question1 = Entry(self)
         enter_question1.pack()
         ###########QUESTION2##############
-        question2 = Label(self, text='Q2: Enter a personal pronoun from the above story')
+        sentence2 = 'question number 2 : Enter a personal pronoun from the above story'
+        q2 = Button(self, text="play audio", command=lambda: tts(sentence2))
+        q2.pack()
+        question2 = Label(self, text='Enter a personal pronoun from the above story')
         question2.pack()
         enter_question2 = Entry(self)
         enter_question2.pack()
         ###########QUESTION3##############
-        question3 = Label(self, text=f'Q3: What is the meaning of {random_adjective}?')
+        sentence3 = f'question number 3 : What is the meaning of {random_adjective}?'
+        q3 = Button(self, text="play audio", command=lambda: tts(sentence3))
+        q3.pack()
+        question3 = Label(self, text=f'What is the meaning of {random_adjective}?')
         question3.pack()
         enter_question3 = Entry(self)
         enter_question3.pack()
         synonyms_list = dictionary.synonym(random_adjective)
         random_synonym = random.choice(synonyms_list)
         ###########QUESTION4##############
-        question4 = Label(self, text=f'Q4: What is the opposite of {random_adjective2}?')
+        sentence4 = f'question number 4 : What is the opposite of {random_adjective2}?'
+        q4 = Button(self, text="play audio", command=lambda: tts(sentence4))
+        q4.pack()
+        question4 = Label(self, text=f'What is the opposite of {random_adjective2}?')
         question4.pack()
         antonym_list = dictionary.antonym(random_adjective2)
         random_antonym = random.choice(antonym_list).translate(str.maketrans('', '', string.punctuation))
@@ -556,8 +618,10 @@ class guessing_game4(Frame):
         option2.pack()
 
         ############QUESTION5##############
-
-        question5 = Label(self, text=f'Q3: What is the singular noun of {random_noun}?')
+        sentence5 = f'question number 5 : What is the singular noun of {random_noun}?'
+        q5 = Button(self, text="play audio", command=lambda: tts(sentence5))
+        q5.pack()
+        question5 = Label(self, text=f'What is the singular noun of {random_noun}?')
         question5.pack()
         enter_question5 = Entry(self)
         enter_question5.pack()
