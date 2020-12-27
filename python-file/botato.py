@@ -8,6 +8,9 @@ from PyDictionary import PyDictionary
 import inflect
 import string
 import pyttsx3
+from PIL import Image,ImageTk
+import  requests
+from io import BytesIO
 dictionary=PyDictionary()
 sp = spacy.load('en_core_web_sm')
 
@@ -89,15 +92,23 @@ class story_page1(Frame):
     """
 
     def __init__(self, parent, controller):
-        Frame.__init__(self, parent)
+        Frame.__init__(self, parent,bg ='pink')
 
         with open('../json/top10.json') as fp:
             data = json.load(fp)
             random_index = random.randint(0, len(data) - 1)
             title = Label(self ,text = data[random_index]['title'])
             title.pack()
+            data3 = data[random_index]['image']
+
+            c = Canvas(self)
+            response = requests.get(data3)
+            c.pack(fill=BOTH, anchor='nw', expand=True)
+            img = ImageTk.PhotoImage(Image.open(BytesIO(response.content)).resize((200, 100), Image.ANTIALIAS))
+            c.background = img  # Keep a reference in case this code is put in a function.
+            bg = c.create_image(0, 0, anchor=NW, image=img)
             data2 = data[random_index]['pargraph']
-            pargraph = Label(self, text= data2)
+            pargraph = Label(self, text=data2)
             pargraph.pack()
             paragraphs_list1.insert(0,data[random_index]['pargraph'])
             p = vlc.MediaPlayer(data[random_index]['audio'])
