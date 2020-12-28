@@ -130,6 +130,7 @@ class home_page(Frame):
         game2.background = img_button7
 
 
+
 class story_page1(Frame):
     """
     a class to view each story, taken from categories.
@@ -482,10 +483,10 @@ class guessing_game1(Frame):
         random_antonym = random.choice(antonym_list).translate(str.maketrans('', '', string.punctuation))
         m = IntVar()
         option1 = Radiobutton(c, text=f'(a){random_antonym}', variable=m, value=1, font=("Comic Sans MS", 12),
-                              bg='#DAC7FF',selectcolor='#F9C6DE',activebackground='#F9C6DE',highlightcolor='#F9C6DE')
+                              bg='#DAC7FF', selectcolor='#F9C6DE', activebackground='#F9C6DE', highlightcolor='#F9C6DE')
         option1.place(x=900, y=475)
         option2 = Radiobutton(c, text=f'(b){random_synonym}', variable=m, value=2, font=("Comic Sans MS", 12),
-                              bg='#DAC7FF',selectcolor='#F9C6DE',activebackground='#F9C6DE',highlightcolor='#F9C6DE')
+                              bg='#DAC7FF', selectcolor='#F9C6DE', activebackground='#F9C6DE', highlightcolor='#F9C6DE')
         option2.place(x=900, y=525)
 
         ############QUESTION5##############
@@ -536,9 +537,15 @@ class guessing_game1(Frame):
             else:
                 print('wrong5')
             messagebox.showinfo('Result', f'Your score is {str(score)}. Thanks for playing.')
+            enter_question1.delete(0, 'end')
+            enter_question2.delete(0, 'end')
+            enter_question3.delete(0, 'end')
+            enter_question5.delete(0, 'end')
+            score = 0
 
         submit = Button(c, text="Submit", command=pop_up)
         submit.place(x=925, y=725, height=45, width=150)
+
 
 
 class guessing_game2(Frame):
@@ -643,10 +650,10 @@ class guessing_game2(Frame):
         random_antonym = random.choice(antonym_list).translate(str.maketrans('', '', string.punctuation))
         m = IntVar()
         option1 = Radiobutton(c, text=f'(a){random_antonym}', variable=m, value=1, font=("Comic Sans MS", 12),
-                              bg='#DAC7FF',selectcolor='#F9C6DE',activebackground='#F9C6DE',highlightcolor='#F9C6DE')
+                              bg='#DAC7FF', selectcolor='#F9C6DE', activebackground='#F9C6DE', highlightcolor='#F9C6DE')
         option1.place(x=900, y=475)
         option2 = Radiobutton(c, text=f'(b){random_synonym}', variable=m, value=2, font=("Comic Sans MS", 12),
-                              bg='#DAC7FF',selectcolor='#F9C6DE',activebackground='#F9C6DE',highlightcolor='#F9C6DE')
+                              bg='#DAC7FF', selectcolor='#F9C6DE', activebackground='#F9C6DE', highlightcolor='#F9C6DE')
         option2.place(x=900, y=525)
 
         ############QUESTION5##############
@@ -697,6 +704,11 @@ class guessing_game2(Frame):
             else:
                 print('wrong5')
             messagebox.showinfo('Result', f'Your score is {str(score)}. Thanks for playing.')
+            enter_question1.delete(0, 'end')
+            enter_question2.delete(0, 'end')
+            enter_question3.delete(0, 'end')
+            enter_question5.delete(0, 'end')
+            score = 0
 
         submit = Button(self, text="Submit", command=pop_up)
         submit.place(x=925, y=725, height=45, width=150)
@@ -795,10 +807,10 @@ class guessing_game3(Frame):
         random_antonym = random.choice(antonym_list).translate(str.maketrans('', '', string.punctuation))
         m = IntVar()
         option1 = Radiobutton(c, text=f'(a){random_antonym}', variable=m, value=1, font=("Comic Sans MS", 12),
-                              bg='#DAC7FF',selectcolor='#F9C6DE',activebackground='#F9C6DE',highlightcolor='#F9C6DE')
+                              bg='#DAC7FF', selectcolor='#F9C6DE', activebackground='#F9C6DE', highlightcolor='#F9C6DE')
         option1.place(x=900, y=475)
         option2 = Radiobutton(c, text=f'(b){random_synonym}', variable=m, value=2, font=("Comic Sans MS", 12),
-                              bg='#DAC7FF',selectcolor='#F9C6DE',activebackground='#F9C6DE',highlightcolor='#F9C6DE')
+                              bg='#DAC7FF', selectcolor='#F9C6DE', activebackground='#F9C6DE', highlightcolor='#F9C6DE')
         option2.place(x=900, y=525)
 
         ############QUESTION5##############
@@ -849,6 +861,11 @@ class guessing_game3(Frame):
             else:
                 print('wrong5')
             messagebox.showinfo('Result', f'Your score is {str(score)}. Thanks for playing.')
+            enter_question1.delete(0, 'end')
+            enter_question2.delete(0, 'end')
+            enter_question3.delete(0, 'end')
+            enter_question5.delete(0, 'end')
+            score = 0
 
         submit = Button(self, text="Submit", command=pop_up)
         submit.place(x=925, y=725, height=45, width=150)
@@ -947,10 +964,10 @@ class guessing_game4(Frame):
         random_antonym = random.choice(antonym_list).translate(str.maketrans('', '', string.punctuation))
         m = IntVar()
         option1 = Radiobutton(c, text=f'(a){random_antonym}', variable=m, value=1, font=("Comic Sans MS", 12),
-                              bg='#DAC7FF',selectcolor='#F9C6DE',activebackground='#F9C6DE',highlightcolor='#F9C6DE')
+                              bg='#DAC7FF', selectcolor='#F9C6DE', activebackground='#F9C6DE', highlightcolor='#F9C6DE')
         option1.place(x=900, y=475)
         option2 = Radiobutton(c, text=f'(b){random_synonym}', variable=m, value=2, font=("Comic Sans MS", 12),
-                              bg='#DAC7FF',selectcolor='#F9C6DE',activebackground='#F9C6DE',highlightcolor='#F9C6DE')
+                              bg='#DAC7FF', selectcolor='#F9C6DE', activebackground='#F9C6DE', highlightcolor='#F9C6DE')
         option2.place(x=900, y=525)
 
         ############QUESTION5##############
@@ -1001,6 +1018,11 @@ class guessing_game4(Frame):
             else:
                 print('wrong5')
             messagebox.showinfo('Result', f'Your score is {str(score)}. Thanks for playing.')
+            enter_question1.delete(0, 'end')
+            enter_question2.delete(0, 'end')
+            enter_question3.delete(0, 'end')
+            enter_question5.delete(0, 'end')
+            score = 0
 
         submit = Button(self, text="Submit", command=pop_up)
         submit.place(x=925, y=725, height=45, width=150)
