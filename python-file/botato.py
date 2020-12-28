@@ -105,7 +105,7 @@ class home_page(Frame):
         fourth_category.background = img_button4
 
         img_button5 = ImageTk.PhotoImage(
-            Image.open('..\\images\\songs2.jpg').resize((450, 150), Image.ANTIALIAS))
+            Image.open('..\\images\\songs!.jpg').resize((450, 150), Image.ANTIALIAS))
         song = Button(c, image=img_button5, command=lambda: controller.show_frame(song_page))
         song.place(x=800, y=570)
         song.background = img_button5
@@ -115,7 +115,7 @@ class home_page(Frame):
             os.system(filename)
 
         img_button6 = ImageTk.PhotoImage(
-            Image.open('..\\images\\newpuzzle.jpg').resize((450, 150), Image.ANTIALIAS))
+            Image.open('..\\images\\puzzle.jpg').resize((450, 150), Image.ANTIALIAS))
         game = Button(self, image=img_button6, command=lambda: callback())
         game.place(x=300, y=570)
         game.background = img_button6
@@ -249,7 +249,7 @@ class story_page2(Frame):
                       command=lambda: controller.show_frame(home_page))
         home.place(x=460, y=500)
         game = Button(c, text="Guessing Game", height=3, width=15, bg='#5bc6c9',
-                      command=lambda: controller.show_frame(guessing_game1))
+                      command=lambda: controller.show_frame(guessing_game2))
         game.place(x=580, y=500)
 
 
@@ -307,7 +307,7 @@ class story_page3(Frame):
                       command=lambda: controller.show_frame(home_page))
         home.place(x=460, y=500)
         game = Button(c, text="Guessing Game", height=3, width=15, bg='#5bc6c9',
-                      command=lambda: controller.show_frame(guessing_game1))
+                      command=lambda: controller.show_frame(guessing_game3))
         game.place(x=580, y=500)
 
 
@@ -364,7 +364,7 @@ class story_page4(Frame):
                       command=lambda: controller.show_frame(home_page))
         home.place(x=460, y=500)
         game = Button(c, text="Guessing Game", height=3, width=15, bg='#5bc6c9',
-                      command=lambda: controller.show_frame(guessing_game1))
+                      command=lambda: controller.show_frame(guessing_game4))
         game.place(x=580, y=500)
 
 
