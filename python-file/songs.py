@@ -27,4 +27,5 @@ button14 = Button(root, text='pause', command=lambda: pause()).place(x=300, y=70
 button15 = Button(root, text='unpause', command=lambda: unpause()).place(x=380, y=70)
 root.geometry('600x610+400+100')
 root.configure(bg="#afd")
+
 root.mainloop()
