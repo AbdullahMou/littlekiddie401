@@ -525,9 +525,15 @@ class guessing_game1(Frame):
             else:
                 print('wrong5')
             messagebox.showinfo('Result', f'Your score is {str(score)}. Thanks for playing.')
+            enter_question1.delete(0, 'end')
+            enter_question2.delete(0, 'end')
+            enter_question3.delete(0, 'end')
+            enter_question5.delete(0, 'end')
+            score = 0
 
         submit = Button(c, text="Submit", command=pop_up)
         submit.place(x=925, y=725, height=45, width=150)
+
 
 
 class guessing_game2(Frame):
@@ -684,6 +690,11 @@ class guessing_game2(Frame):
             else:
                 print('wrong5')
             messagebox.showinfo('Result', f'Your score is {str(score)}. Thanks for playing.')
+            enter_question1.delete(0, 'end')
+            enter_question2.delete(0, 'end')
+            enter_question3.delete(0, 'end')
+            enter_question5.delete(0, 'end')
+            score = 0
 
         submit = Button(self, text="Submit", command=pop_up)
         submit.place(x=925, y=725, height=45, width=150)
@@ -834,6 +845,11 @@ class guessing_game3(Frame):
             else:
                 print('wrong5')
             messagebox.showinfo('Result', f'Your score is {str(score)}. Thanks for playing.')
+            enter_question1.delete(0, 'end')
+            enter_question2.delete(0, 'end')
+            enter_question3.delete(0, 'end')
+            enter_question5.delete(0, 'end')
+            score = 0
 
         submit = Button(self, text="Submit", command=pop_up)
         submit.place(x=925, y=725, height=45, width=150)
@@ -984,6 +1000,11 @@ class guessing_game4(Frame):
             else:
                 print('wrong5')
             messagebox.showinfo('Result', f'Your score is {str(score)}. Thanks for playing.')
+            enter_question1.delete(0, 'end')
+            enter_question2.delete(0, 'end')
+            enter_question3.delete(0, 'end')
+            enter_question5.delete(0, 'end')
+            score = 0
 
         submit = Button(self, text="Submit", command=pop_up)
         submit.place(x=925, y=725, height=45, width=150)
