@@ -97,8 +97,21 @@ class story_page1(Frame):
             title = Label(self ,text = data[random_index]['title'])
             title.pack()
             data2 = data[random_index]['pargraph']
-            pargraph = Label(self, text= data2)
-            pargraph.pack()
+            S = Scrollbar(self)
+            T = Text(self, height=15, width=100,wrap=WORD,padx=(10) , pady=(10))
+            S.pack(side=RIGHT, fill=Y)
+            T.tag_configure('bold_italics', font=('Arial', 12, 'bold', 'italic'))
+            T.tag_configure('big', font=('Verdana', 20, 'bold'))
+            T.tag_configure('color',
+                            foreground='#476042',
+                            font=('Tempus Sans ITC', 12, 'bold'))
+            T.pack(pady=(40, 10), padx=(10, 10))
+            T.insert(END, data2)
+            S.config(command=T.yview)
+            T.config(yscrollcommand=S.set)
+            # pargraph = Label(self, text= data2)
+            # pargraph.pack()
+
             paragraphs_list1.insert(0,data[random_index]['pargraph'])
             p = vlc.MediaPlayer(data[random_index]['audio'])
             audio = Button(self, text="play audio", command=p.play)
