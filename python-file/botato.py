@@ -70,15 +70,14 @@ class home_page(Frame):
         # creating a simple canvas
         c = Canvas(self)
         c.pack(fill=BOTH, anchor='nw', expand=True)
-        img = ImageTk.PhotoImage(Image.open('..\\images\\sondos.jpg').resize((1540, 800), Image.ANTIALIAS))
+        img = ImageTk.PhotoImage(Image.open('..\\images\\mais97.jpg').resize((1540, 800), Image.ANTIALIAS))
         c.background = img  # Keep a reference in case this code is put in a function.
         bg = c.create_image(0, 0, anchor=NW, image=img)
         c.create_text(750, 100, text='Welcome to LittleKiddie', font=("Comic Sans MS", 30))
 
         c.create_text(320, 480, text="Best Stories", font=("Comic Sans MS", 20))
 
-        img_button = ImageTk.PhotoImage(
-            Image.open('..\\images\\top-10-set-label-vector.jpg').resize((250, 250), Image.ANTIALIAS))
+        img_button = ImageTk.PhotoImage(Image.open('..\\images\\numbers12.png').resize((250, 250), Image.ANTIALIAS))
         first_category = Button(c, image=img_button, command=lambda: controller.show_frame(story_page1))
         first_category.place(x=200, y=200)
         first_category.background = img_button
@@ -99,15 +98,15 @@ class home_page(Frame):
 
         c.create_text(1220, 480, text="Moral Stories", font=("Comic Sans MS", 20))
         img_button4 = ImageTk.PhotoImage(
-            Image.open('../images/back.jpg').resize((250, 250), Image.ANTIALIAS))
+            Image.open('..\\images\\morallove.png').resize((250, 250), Image.ANTIALIAS))
         fourth_category = Button(c, image=img_button4, command=lambda: controller.show_frame(story_page4))
         fourth_category.place(x=1080, y=200)
         fourth_category.background = img_button4
 
         img_button5 = ImageTk.PhotoImage(
-            Image.open('..\\images\\songs!.jpg').resize((450, 150), Image.ANTIALIAS))
+            Image.open('..\\images\\songs97.jpg').resize((250, 150), Image.ANTIALIAS))
         song = Button(c, image=img_button5, command=lambda: controller.show_frame(song_page))
-        song.place(x=800, y=570)
+        song.place(x=870, y=570)
         song.background = img_button5
 
         def callback():
@@ -115,10 +114,21 @@ class home_page(Frame):
             os.system(filename)
 
         img_button6 = ImageTk.PhotoImage(
-            Image.open('..\\images\\puzzle.jpg').resize((450, 150), Image.ANTIALIAS))
+            Image.open('..\\images\\slide-pu.jpg').resize((250, 150), Image.ANTIALIAS))
         game = Button(self, image=img_button6, command=lambda: callback())
-        game.place(x=300, y=570)
+        game.place(x=585, y=570)
         game.background = img_button6
+
+        def callback_piano():
+            filename = 'rand.py'
+            os.system(filename)
+
+        img_button7 = ImageTk.PhotoImage(
+            Image.open('..\\images\\piano.jpg').resize((250, 150), Image.ANTIALIAS))
+        game2 = Button(self, image=img_button7, command=lambda: callback_piano())
+        game2.place(x=300, y=570)
+        game2.background = img_button7
+
 
 
 class story_page1(Frame):
@@ -387,7 +397,7 @@ class guessing_game1(Frame):
         Frame.__init__(self, parent)
         c = Canvas(self)
         c.pack(fill=BOTH, anchor='nw', expand=True)
-        img = ImageTk.PhotoImage(Image.open('..\\images\\sondos.jpg').resize((1540, 800), Image.ANTIALIAS))
+        img = ImageTk.PhotoImage(Image.open('..\\images\\guessing-background.jpg').resize((1540, 800), Image.ANTIALIAS))
         c.background = img
         bg = c.create_image(0, 0, anchor=NW, image=img)
         adjectives = []
@@ -472,9 +482,11 @@ class guessing_game1(Frame):
         antonym_list = dictionary.antonym(random_adjective2)
         random_antonym = random.choice(antonym_list).translate(str.maketrans('', '', string.punctuation))
         m = IntVar()
-        option1 = Radiobutton(c, text=f'(a){random_antonym}', variable=m, value=1, font=("Comic Sans MS", 12),bg='#e2f8fb',selectcolor='#26b7ba',highlightcolor='#26b7ba')
+        option1 = Radiobutton(c, text=f'(a){random_antonym}', variable=m, value=1, font=("Comic Sans MS", 12),
+                              bg='#DAC7FF', selectcolor='#F9C6DE', activebackground='#F9C6DE', highlightcolor='#F9C6DE')
         option1.place(x=900, y=475)
-        option2 = Radiobutton(c, text=f'(b){random_synonym}', variable=m, value=2, font=("Comic Sans MS", 12))
+        option2 = Radiobutton(c, text=f'(b){random_synonym}', variable=m, value=2, font=("Comic Sans MS", 12),
+                              bg='#DAC7FF', selectcolor='#F9C6DE', activebackground='#F9C6DE', highlightcolor='#F9C6DE')
         option2.place(x=900, y=525)
 
         ############QUESTION5##############
@@ -525,9 +537,15 @@ class guessing_game1(Frame):
             else:
                 print('wrong5')
             messagebox.showinfo('Result', f'Your score is {str(score)}. Thanks for playing.')
+            enter_question1.delete(0, 'end')
+            enter_question2.delete(0, 'end')
+            enter_question3.delete(0, 'end')
+            enter_question5.delete(0, 'end')
+            score = 0
 
         submit = Button(c, text="Submit", command=pop_up)
         submit.place(x=925, y=725, height=45, width=150)
+
 
 
 class guessing_game2(Frame):
@@ -548,7 +566,7 @@ class guessing_game2(Frame):
 
         c = Canvas(self)
         c.pack(fill=BOTH, anchor='nw', expand=True)
-        img = ImageTk.PhotoImage(Image.open('..\\images\\sondos.jpg').resize((1540, 800), Image.ANTIALIAS))
+        img = ImageTk.PhotoImage(Image.open('..\\images\\guessing-background.jpg').resize((1540, 800), Image.ANTIALIAS))
         c.background = img
         bg = c.create_image(0, 0, anchor=NW, image=img)
         adjectives = []
@@ -631,9 +649,11 @@ class guessing_game2(Frame):
         antonym_list = dictionary.antonym(random_adjective2)
         random_antonym = random.choice(antonym_list).translate(str.maketrans('', '', string.punctuation))
         m = IntVar()
-        option1 = Radiobutton(c, text=f'(a){random_antonym}', variable=m, value=1, font=("Comic Sans MS", 12))
+        option1 = Radiobutton(c, text=f'(a){random_antonym}', variable=m, value=1, font=("Comic Sans MS", 12),
+                              bg='#DAC7FF', selectcolor='#F9C6DE', activebackground='#F9C6DE', highlightcolor='#F9C6DE')
         option1.place(x=900, y=475)
-        option2 = Radiobutton(c, text=f'(b){random_synonym}', variable=m, value=2, font=("Comic Sans MS", 12))
+        option2 = Radiobutton(c, text=f'(b){random_synonym}', variable=m, value=2, font=("Comic Sans MS", 12),
+                              bg='#DAC7FF', selectcolor='#F9C6DE', activebackground='#F9C6DE', highlightcolor='#F9C6DE')
         option2.place(x=900, y=525)
 
         ############QUESTION5##############
@@ -684,6 +704,11 @@ class guessing_game2(Frame):
             else:
                 print('wrong5')
             messagebox.showinfo('Result', f'Your score is {str(score)}. Thanks for playing.')
+            enter_question1.delete(0, 'end')
+            enter_question2.delete(0, 'end')
+            enter_question3.delete(0, 'end')
+            enter_question5.delete(0, 'end')
+            score = 0
 
         submit = Button(self, text="Submit", command=pop_up)
         submit.place(x=925, y=725, height=45, width=150)
@@ -698,7 +723,7 @@ class guessing_game3(Frame):
         Frame.__init__(self, parent)
         c = Canvas(self)
         c.pack(fill=BOTH, anchor='nw', expand=True)
-        img = ImageTk.PhotoImage(Image.open('..\\images\\sondos.jpg').resize((1540, 800), Image.ANTIALIAS))
+        img = ImageTk.PhotoImage(Image.open('..\\images\\guessing-background.jpg').resize((1540, 800), Image.ANTIALIAS))
         c.background = img
         bg = c.create_image(0, 0, anchor=NW, image=img)
         adjectives = []
@@ -781,9 +806,11 @@ class guessing_game3(Frame):
         antonym_list = dictionary.antonym(random_adjective2)
         random_antonym = random.choice(antonym_list).translate(str.maketrans('', '', string.punctuation))
         m = IntVar()
-        option1 = Radiobutton(c, text=f'(a){random_antonym}', variable=m, value=1, font=("Comic Sans MS", 12))
+        option1 = Radiobutton(c, text=f'(a){random_antonym}', variable=m, value=1, font=("Comic Sans MS", 12),
+                              bg='#DAC7FF', selectcolor='#F9C6DE', activebackground='#F9C6DE', highlightcolor='#F9C6DE')
         option1.place(x=900, y=475)
-        option2 = Radiobutton(c, text=f'(b){random_synonym}', variable=m, value=2, font=("Comic Sans MS", 12))
+        option2 = Radiobutton(c, text=f'(b){random_synonym}', variable=m, value=2, font=("Comic Sans MS", 12),
+                              bg='#DAC7FF', selectcolor='#F9C6DE', activebackground='#F9C6DE', highlightcolor='#F9C6DE')
         option2.place(x=900, y=525)
 
         ############QUESTION5##############
@@ -834,6 +861,11 @@ class guessing_game3(Frame):
             else:
                 print('wrong5')
             messagebox.showinfo('Result', f'Your score is {str(score)}. Thanks for playing.')
+            enter_question1.delete(0, 'end')
+            enter_question2.delete(0, 'end')
+            enter_question3.delete(0, 'end')
+            enter_question5.delete(0, 'end')
+            score = 0
 
         submit = Button(self, text="Submit", command=pop_up)
         submit.place(x=925, y=725, height=45, width=150)
@@ -848,7 +880,7 @@ class guessing_game4(Frame):
         Frame.__init__(self, parent)
         c = Canvas(self)
         c.pack(fill=BOTH, anchor='nw', expand=True)
-        img = ImageTk.PhotoImage(Image.open('..\\images\\sondos.jpg').resize((1540, 800), Image.ANTIALIAS))
+        img = ImageTk.PhotoImage(Image.open('..\\images\\guessing-background.jpg').resize((1540, 800), Image.ANTIALIAS))
         c.background = img
         bg = c.create_image(0, 0, anchor=NW, image=img)
         adjectives = []
@@ -931,9 +963,11 @@ class guessing_game4(Frame):
         antonym_list = dictionary.antonym(random_adjective2)
         random_antonym = random.choice(antonym_list).translate(str.maketrans('', '', string.punctuation))
         m = IntVar()
-        option1 = Radiobutton(c, text=f'(a){random_antonym}', variable=m, value=1, font=("Comic Sans MS", 12))
+        option1 = Radiobutton(c, text=f'(a){random_antonym}', variable=m, value=1, font=("Comic Sans MS", 12),
+                              bg='#DAC7FF', selectcolor='#F9C6DE', activebackground='#F9C6DE', highlightcolor='#F9C6DE')
         option1.place(x=900, y=475)
-        option2 = Radiobutton(c, text=f'(b){random_synonym}', variable=m, value=2, font=("Comic Sans MS", 12))
+        option2 = Radiobutton(c, text=f'(b){random_synonym}', variable=m, value=2, font=("Comic Sans MS", 12),
+                              bg='#DAC7FF', selectcolor='#F9C6DE', activebackground='#F9C6DE', highlightcolor='#F9C6DE')
         option2.place(x=900, y=525)
 
         ############QUESTION5##############
@@ -984,6 +1018,11 @@ class guessing_game4(Frame):
             else:
                 print('wrong5')
             messagebox.showinfo('Result', f'Your score is {str(score)}. Thanks for playing.')
+            enter_question1.delete(0, 'end')
+            enter_question2.delete(0, 'end')
+            enter_question3.delete(0, 'end')
+            enter_question5.delete(0, 'end')
+            score = 0
 
         submit = Button(self, text="Submit", command=pop_up)
         submit.place(x=925, y=725, height=45, width=150)
