@@ -472,7 +472,7 @@ class guessing_game1(Frame):
         antonym_list = dictionary.antonym(random_adjective2)
         random_antonym = random.choice(antonym_list).translate(str.maketrans('', '', string.punctuation))
         m = IntVar()
-        option1 = Radiobutton(c, text=f'(a){random_antonym}', variable=m, value=1, font=("Comic Sans MS", 12))
+        option1 = Radiobutton(c, text=f'(a){random_antonym}', variable=m, value=1, font=("Comic Sans MS", 12),bg='#e2f8fb',selectcolor='#26b7ba',highlightcolor='#26b7ba')
         option1.place(x=900, y=475)
         option2 = Radiobutton(c, text=f'(b){random_synonym}', variable=m, value=2, font=("Comic Sans MS", 12))
         option2.place(x=900, y=525)
