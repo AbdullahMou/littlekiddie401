@@ -119,7 +119,7 @@ class home_page(Frame):
         game.background = img_button6
 
         def callback_piano():
-            filename = 'rand.py'
+            filename = 'piano.py'
             os.system(filename)
 
         img_button7 = ImageTk.PhotoImage(
@@ -987,16 +987,15 @@ class guessing_game4(Frame):
         submit.place(x=925, y=725, height=45, width=150)
 
 
+
+
+
+
 class song_page(Frame):
     def __init__(self, parent, controller):
         Frame.__init__(self, parent)
         c = Canvas(self)
-        c.pack(fill=BOTH, anchor='nw', expand=True)
-        img = ImageTk.PhotoImage(Image.open('..\\images\\Untitled design (1).jpg').resize((1540, 800), Image.ANTIALIAS))
-        c.background = img
-        bg = c.create_image(0, 0, anchor=NW, image=img)
-        label = Label(self, text="song title")
-        label.pack(padx=10, pady=10)
+
         pygame.mixer.init()
 
         def play(song):
@@ -1011,25 +1010,78 @@ class song_page(Frame):
 
         def unpause():
             pygame.mixer.music.unpause()
+        c.pack(fill=BOTH, anchor='nw', expand=True)
+        img = ImageTk.PhotoImage(Image.open('..\\images\\songs.gif').resize((1540, 800), Image.ANTIALIAS))
+        c.background = img
+        bg = c.create_image(0, 0, anchor=NW, image=img)
+        button1 = ImageTk.PhotoImage(Image.open('..\\images\\1.png').resize((200, 200), Image.ANTIALIAS))
+        first_song = Button(c, image=button1, command=lambda: play('..\\songs\\1_In_His_Hands.mp3'))
+        first_song.place(x=20, y=340)
+        first_song.background = button1
 
-        button1 = Button(self, text='Play1', command=lambda: play('..\\songs\\1_In_His_Hands.mp3')).place(x=100, y=420)
-        button2 = Button(self, text='Play2', command=lambda: play('..\\songs\\2_Good_Morning.mp3')).place(x=100, y=220)
-        button3 = Button(self, text='Play2', command=lambda: play('..\\songs\\8_Friends.mp3')).place(x=100, y=270)
-        button4 = Button(self, text='Play2', command=lambda: play('..\\songs\\3_Body_Parts.mp3')).place(x=100, y=320)
-        button5 = Button(self, text='Play2', command=lambda: play('..\\songs\\4_Clap_Your_Hands.mp3')).place(x=100, y=370)
-        button6 = Button(self, text='Play2', command=lambda: play('..\\songs\\5_Funny_Long_Song.mp3')).place(x=450, y=220)
-        button7 = Button(self, text='Play2', command=lambda: play('..\\songs\\6_Sing_for_Me.mp3')).place(x=450, y=270)
-        button8 = Button(self, text='Play2', command=lambda: play('..\\songs\\7_Ready_to_Get_Washed.mp3')).place(x=450, y=320)
-        button9 = Button(self, text='Play2', command=lambda: play('..\\songs\\bluebird-through-my-window.mp3')).place(x=450, y=370)
-        button0 = Button(self, text='Play2', command=lambda: play('..\\songs\\dancing-rainbow-colors.mp3')).place(x=450, y=420)
-        button13 = Button(self, text='stop', command=lambda: stop()).place(x=220, y=70)
-        button14 = Button(self, text='pause', command=lambda: pause()).place(x=300, y=70)
-        button15 = Button(self, text='unpause', command=lambda: unpause())
-        button15.place(x=380, y=70)
-        start_page = Button(self, text="Go to the home page", command=lambda: controller.show_frame(home_page))
+        button2 = ImageTk.PhotoImage(Image.open('..\\images\\2.png').resize((200, 200), Image.ANTIALIAS))
+        secound_song = Button(c, image=button2, command=lambda: play('..\\songs\\2_Good_Morning.mp3'))
+        secound_song.place(x=250, y=560)
+        secound_song.background = button2
 
+        button3 = ImageTk.PhotoImage(Image.open('..\\images\\4.png').resize((200, 200), Image.ANTIALIAS))
+        third_song = Button(c, image=button3, command=lambda: play('..\\songs\\8_Friends.mp3'))
+        third_song.place(x=480, y=340)
+        third_song.background = button3
 
+        button4 = ImageTk.PhotoImage(Image.open('..\\images\\3.png').resize((200, 200), Image.ANTIALIAS))
+        forth_song = Button(c, image=button4, command=lambda: play('..\\songs\\3_Body_Parts.mp3'))
+        forth_song.place(x=250, y=340)
+        forth_song.background = button4
 
+        button5 = ImageTk.PhotoImage(Image.open('..\\images\\7.png').resize((200, 200), Image.ANTIALIAS))
+        fifth_song = Button(c, image=button5, command=lambda: play('..\\songs\\5_Funny_Long_Song.mp3'))
+        fifth_song.place(x=250, y=110)
+        fifth_song.background = button5
+
+        button6 = ImageTk.PhotoImage(Image.open('..\\images\\6.png').resize((200, 200), Image.ANTIALIAS))
+        sixth_song = Button(c, image=button6, command=lambda: play('..\\songs\\6_Sing_for_Me.mp3'))
+        sixth_song.place(x=840, y=340)
+        sixth_song.background = button6
+
+        button7 = ImageTk.PhotoImage(Image.open('..\\images\\8.png').resize((200, 200), Image.ANTIALIAS))
+        seventh_song = Button(c, image=button7, command=lambda: play('..\\songs\\7_Ready_to_Get_Washed.mp3'))
+        seventh_song.place(x=1070, y=340)
+        seventh_song.background = button7
+
+        button8 = ImageTk.PhotoImage(Image.open('..\\images\\9.png').resize((200, 200), Image.ANTIALIAS))
+        eighth_song = Button(c, image=button8, command=lambda: play('..\\songs\\bluebird-through-my-window.mp3'))
+        eighth_song.place(x=1070, y=560)
+        eighth_song.background = button8
+
+        button9 = ImageTk.PhotoImage(Image.open('..\\images\\10.png').resize((200, 200), Image.ANTIALIAS))
+        ninth_song = Button(c, image=button9, command=lambda: play('..\\songs\\dancing-rainbow-colors.mp3'))
+        ninth_song.place(x=1300, y=340)
+        ninth_song.background = button9
+
+        button10 = ImageTk.PhotoImage(Image.open('..\\images\\5.png').resize((200, 200), Image.ANTIALIAS))
+        tenth_song = Button(c, image=button10, command=lambda: play('..\\songs\\4_Clap_Your_Hands.mp3'))
+        tenth_song.place(x=1070, y=110)
+        tenth_song.background = button10
+
+        buttonstop = ImageTk.PhotoImage(Image.open('..\\images\\stop.png').resize((70, 70), Image.ANTIALIAS))
+        b_stop = Button(c, image=buttonstop, command=lambda: stop(), bg='#abd4f6', bd=0)
+        b_stop.place(x=880, y=650)
+        b_stop.background = buttonstop
+
+        button_unpause = ImageTk.PhotoImage(Image.open('..\\images\\pause.png').resize((70, 70), Image.ANTIALIAS))
+        b_unpause = Button(c, image=button_unpause, command=lambda: pause(), bg='#abd4f6', bd=0)
+        b_unpause.place(x=728, y=650)
+        b_unpause.background = button_unpause
+
+        button_pause = ImageTk.PhotoImage(Image.open('..\\images\\play.png').resize((70, 70), Image.ANTIALIAS))
+        b_pause = Button(c, image=button_pause, command=lambda: unpause(), bg='#abd4f6', bd=0)
+        b_pause.place(x=576, y=650)
+        b_pause.background = button_pause
+
+        home = Button(c, text="Home Page", height=2, width=10, bg='#3085D1',
+                      command=lambda: controller.show_frame(home_page) , font = ' bold')
+        home.place(x=20, y=650)
 class File:
     def __init__(self, master):
         menubar = Menu(master)
