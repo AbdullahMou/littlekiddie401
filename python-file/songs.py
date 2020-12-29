@@ -1,7 +1,6 @@
 from tkinter import *
 import pygame
 root = Tk()
-pygame.mixer.init()
 def play(song):
     pygame.mixer.music.load(song)
     pygame.mixer.music.play(-1)
