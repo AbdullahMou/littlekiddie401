@@ -1040,8 +1040,7 @@ class song_page(Frame):
         img = ImageTk.PhotoImage(Image.open('..\\images\\Untitled design (1).jpg').resize((1540, 800), Image.ANTIALIAS))
         c.background = img
         bg = c.create_image(0, 0, anchor=NW, image=img)
-        label = Label(self, text="song title")
-        label.pack(padx=10, pady=10)
+        c.create_text(420, 200, text='Songs ', font=("Comic Sans MS", 28))
         pygame.mixer.init()
 
         def play(song):
@@ -1057,23 +1056,27 @@ class song_page(Frame):
         def unpause():
             pygame.mixer.music.unpause()
 
+
+        c.create_text(400, 150, text='In His Hand ', font=("Comic Sans MS", 20))
         button1 = Button(self, text='Play1', command=lambda: play('..\\songs\\1_In_His_Hands.mp3')).place(x=100, y=420)
-        button2 = Button(self, text='Play2', command=lambda: play('..\\songs\\2_Good_Morning.mp3')).place(x=100, y=220)
-        button3 = Button(self, text='Play2', command=lambda: play('..\\songs\\8_Friends.mp3')).place(x=100, y=270)
-        button4 = Button(self, text='Play2', command=lambda: play('..\\songs\\3_Body_Parts.mp3')).place(x=100, y=320)
-        button5 = Button(self, text='Play2', command=lambda: play('..\\songs\\4_Clap_Your_Hands.mp3')).place(x=100, y=370)
-        button6 = Button(self, text='Play2', command=lambda: play('..\\songs\\5_Funny_Long_Song.mp3')).place(x=450, y=220)
-        button7 = Button(self, text='Play2', command=lambda: play('..\\songs\\6_Sing_for_Me.mp3')).place(x=450, y=270)
-        button8 = Button(self, text='Play2', command=lambda: play('..\\songs\\7_Ready_to_Get_Washed.mp3')).place(x=450, y=320)
-        button9 = Button(self, text='Play2', command=lambda: play('..\\songs\\bluebird-through-my-window.mp3')).place(x=450, y=370)
-        button0 = Button(self, text='Play2', command=lambda: play('..\\songs\\dancing-rainbow-colors.mp3')).place(x=450, y=420)
-        button13 = Button(self, text='stop', command=lambda: stop()).place(x=220, y=70)
-        button14 = Button(self, text='pause', command=lambda: pause()).place(x=300, y=70)
-        button15 = Button(self, text='unpause', command=lambda: unpause())
-        button15.place(x=380, y=70)
+        # button2 = Button(self, text='Play2', command=lambda: play('..\\songs\\2_Good_Morning.mp3')).place(x=100, y=220)
+        # button3 = Button(self, text='Play2', command=lambda: play('..\\songs\\8_Friends.mp3')).place(x=100, y=270)
+        # button4 = Button(self, text='Play2', command=lambda: play('..\\songs\\3_Body_Parts.mp3')).place(x=100, y=320)
+        # button5 = Button(self, text='Play2', command=lambda: play('..\\songs\\4_Clap_Your_Hands.mp3')).place(x=100, y=370)
+        # button6 = Button(self, text='Play2', command=lambda: play('..\\songs\\5_Funny_Long_Song.mp3')).place(x=450, y=220)
+        # button7 = Button(self, text='Play2', command=lambda: play('..\\songs\\6_Sing_for_Me.mp3')).place(x=450, y=270)
+        # button8 = Button(self, text='Play2', command=lambda: play('..\\songs\\7_Ready_to_Get_Washed.mp3')).place(x=450, y=320)
+        # button9 = Button(self, text='Play2', command=lambda: play('..\\songs\\bluebird-through-my-window.mp3')).place(x=450, y=370)
+        # button0 = Button(self, text='Play2', command=lambda: play('..\\songs\\dancing-rainbow-colors.mp3')).place(x=450, y=420)
+        # button13 = Button(self, text='stop', command=lambda: stop()).place(x=220, y=70)
+        # button14 = Button(self, text='pause', command=lambda: pause()).place(x=300, y=70)
+        # button15 = Button(self, text='unpause', command=lambda: unpause())
+        # button15.place(x=380, y=70)
         start_page = Button(self, text="Go to the home page", command=lambda: controller.show_frame(home_page))
 
-
+        home = Button(c, text="Home Page", height=3, width=15, bg='#5bc6c9',
+                      command=lambda: controller.show_frame(home_page))
+        home.place(x=460, y=500)
 
 class File:
     def __init__(self, master):
