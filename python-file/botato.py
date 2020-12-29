@@ -16,11 +16,8 @@ from io import BytesIO
 import os
 import tkinter.font as font
 
-# myFont = Font(family='Helvetica')
-# myFont = font.Font(size=30)
 dictionary = PyDictionary()
 sp = spacy.load('en_core_web_sm')
-# from PIL import Image, ImageTk
 paragraphs_list1 = []
 paragraphs_list2 = []
 paragraphs_list3 = []
@@ -65,10 +62,8 @@ class home_page(Frame):
     """
 
     def __init__(self, parent, controller):
-        # helv36 = tkFont.Font(self,family="Helvetica", size=36, weight="bold")
         Frame.__init__(self, parent)
-        # self.geometry("200x200")
-        # creating a simple canvas
+
         c = Canvas(self)
         c.pack(fill=BOTH, anchor='nw', expand=True)
         img = ImageTk.PhotoImage(Image.open('..\\images\\mais97.jpg').resize((1540, 800), Image.ANTIALIAS))
@@ -184,7 +179,7 @@ class story_page1(Frame):
             T.place(x=850, y=140)
             T.insert(END, data2)
             S.config(command=T.yview)
-            T.config(yscrollcommand=S.set)
+            T.config(yscrollcommand=S.set, state=DISABLED)
 
             paragraphs_list1.insert(0, data[random_index]['pargraph'])
             p = vlc.MediaPlayer(data[random_index]['audio'])
@@ -250,7 +245,7 @@ class story_page2(Frame):
             T.place(x=850, y=140)
             T.insert(END, data2)
             S.config(command=T.yview)
-            T.config(yscrollcommand=S.set)
+            T.config(yscrollcommand=S.set, state=DISABLED)
 
             paragraphs_list2.insert(0, data[random_index]['pargraph'])
             p = vlc.MediaPlayer(data[random_index]['audio'])
@@ -308,7 +303,7 @@ class story_page3(Frame):
             T.place(x=850, y=140)
             T.insert(END, data2)
             S.config(command=T.yview)
-            T.config(yscrollcommand=S.set)
+            T.config(yscrollcommand=S.set, state=DISABLED)
 
             paragraphs_list3.insert(0, data[random_index]['pargraph'])
             p = vlc.MediaPlayer(data[random_index]['audio'])
@@ -365,7 +360,7 @@ class story_page4(Frame):
             T.place(x=850, y=140)
             T.insert(END, data2)
             S.config(command=T.yview)
-            T.config(yscrollcommand=S.set)
+            T.config(yscrollcommand=S.set, state=DISABLED)
 
             paragraphs_list4.insert(0, data[random_index]['pargraph'])
             p = vlc.MediaPlayer(data[random_index]['audio'])
@@ -407,7 +402,7 @@ class guessing_game1(Frame):
         adjectives = []
         nouns = []
 
-        home = Button(c, text="Home Page", command=lambda: controller.show_frame(home_page))
+        home = Button(c, bg='#3f51b5', font='bold', text="Home Page", command=lambda: controller.show_frame(home_page))
         home.place(x=283, y=725, height=45, width=150)
 
         S = Scrollbar(c)
@@ -421,10 +416,9 @@ class guessing_game1(Frame):
         T.place(x=150, y=70)
         T.insert(END, paragraphs_list1[0])
         S.config(command=T.yview)
-        T.config(yscrollcommand=S.set)
+        T.config(yscrollcommand=S.set, state=DISABLED)
 
-        # story_in_game = Label(c, text= paragraphs_list1[0])
-        # story_in_game.pack()
+
         for i in paragraphs_list1[0].split():
             if spacy.explain(sp(i.lower())[0].tag_) == 'adjective':
                 adjectives.append(i)
@@ -447,8 +441,7 @@ class guessing_game1(Frame):
 
         c.create_text(985, 70, text='Enter a past tense verb from the above story', font=("Comic Sans MS", 15))
 
-        # question1=Label(c,text= 'Enter a past tense verb from the above story')
-        # question1.pack()
+
         enter_question1 = Entry(c)
         enter_question1.place(x=850, y=100, height=40, width=300)
         ###########QUESTION2##############
@@ -457,8 +450,7 @@ class guessing_game1(Frame):
         q2.place(x=1225, y=185, height=35, width=80)
 
         c.create_text(1000, 200, text='Enter a personal pronoun from the above story', font=("Comic Sans MS", 15))
-        # question2 = Label(c, text='Q2: Enter a personal pronoun from the above story')
-        # question2.pack()
+
         enter_question2 = Entry(c)
         enter_question2.place(x=850, y=225, height=40, width=300)
         ###########QUESTION3##############
@@ -468,8 +460,6 @@ class guessing_game1(Frame):
 
         c.create_text(925, 330, text=f'What is the meaning of {random_adjective}?', font=("Comic Sans MS", 15))
 
-        # question3 = Label(c, text=f'Q3: What is the meaning of {random_adjective}?')
-        # question3.pack()
         enter_question3 = Entry(c)
         enter_question3.place(x=850, y=350, height=40, width=300)
         synonyms_list = dictionary.synonym(random_adjective)
@@ -481,8 +471,6 @@ class guessing_game1(Frame):
 
         c.create_text(945, 450, text=f'What is the opposite of {random_adjective2}?', font=("Comic Sans MS", 15))
 
-        # question4 = Label(c, text=f'Q4: What is the opposite of {random_adjective2}?')
-        # question4.pack()
         antonym_list = dictionary.antonym(random_adjective2)
         random_antonym = random.choice(antonym_list).translate(str.maketrans('', '', string.punctuation))
         m = IntVar()
@@ -500,12 +488,10 @@ class guessing_game1(Frame):
 
         c.create_text(965, 600, text=f'What is the singular noun of {random_noun}?', font=("Comic Sans MS", 15))
 
-        # question5 = Label(c, text=f'Q3: What is the singular noun of {random_noun}?')
-        # question5.pack()
+
         enter_question5 = Entry(c)
         enter_question5.place(x=850, y=650, height=40, width=300)
-        # noun_list=dictionary.singular(random_adjective2)
-        # random_antonym = random.choice(antonym_list)
+
         p = inflect.engine()
 
         def pop_up():
@@ -547,7 +533,7 @@ class guessing_game1(Frame):
             enter_question5.delete(0, 'end')
             score = 0
 
-        submit = Button(c, text="Submit", command=pop_up)
+        submit = Button(c, bg='#3f51b5', font='bold', text="Submit", command=pop_up)
         submit.place(x=925, y=725, height=45, width=150)
 
 
@@ -559,14 +545,7 @@ class guessing_game2(Frame):
 
     def __init__(self, parent, controller):
         Frame.__init__(self, parent)
-        # adjectives = []
-        # nouns = []
-        # label = Label(self, text="Page Two")
-        # label.pack(padx=10, pady=10)
-        # home = Button(self, text="Go to the home page", command=lambda: controller.show_frame(home_page))
-        # home.pack()
-        # story_in_game = Label(self, text=paragraphs_list2[0])
-        # story_in_game.pack()
+
 
         c = Canvas(self)
         c.pack(fill=BOTH, anchor='nw', expand=True)
@@ -576,7 +555,7 @@ class guessing_game2(Frame):
         adjectives = []
         nouns = []
 
-        home = Button(c, text="Home Page", command=lambda: controller.show_frame(home_page))
+        home = Button(c,  bg='#3f51b5', font='bold',text="Home Page", command=lambda: controller.show_frame(home_page))
         home.place(x=283, y=725, height=45, width=150)
 
         S = Scrollbar(c)
@@ -590,7 +569,7 @@ class guessing_game2(Frame):
         T.place(x=150, y=70)
         T.insert(END, paragraphs_list2[0])
         S.config(command=T.yview)
-        T.config(yscrollcommand=S.set)
+        T.config(yscrollcommand=S.set, state=DISABLED)
 
         for i in paragraphs_list2[0].split():
             if spacy.explain(sp(i.lower())[0].tag_) == 'adjective':
@@ -614,8 +593,6 @@ class guessing_game2(Frame):
 
         c.create_text(985, 70, text='Enter a past tense verb from the above story', font=("Comic Sans MS", 15))
 
-        # question1=Label(c,text= 'Enter a past tense verb from the above story')
-        # question1.pack()
         enter_question1 = Entry(c)
         enter_question1.place(x=850, y=100, height=40, width=300)
         ###########QUESTION2##############
@@ -624,8 +601,7 @@ class guessing_game2(Frame):
         q2.place(x=1225, y=185, height=35, width=80)
 
         c.create_text(1000, 200, text='Enter a personal pronoun from the above story', font=("Comic Sans MS", 15))
-        # question2 = Label(c, text='Q2: Enter a personal pronoun from the above story')
-        # question2.pack()
+
         enter_question2 = Entry(c)
         enter_question2.place(x=850, y=225, height=40, width=300)
         ###########QUESTION3##############
@@ -635,8 +611,6 @@ class guessing_game2(Frame):
 
         c.create_text(925, 330, text=f'What is the meaning of {random_adjective}?', font=("Comic Sans MS", 15))
 
-        # question3 = Label(c, text=f'Q3: What is the meaning of {random_adjective}?')
-        # question3.pack()
         enter_question3 = Entry(c)
         enter_question3.place(x=850, y=350, height=40, width=300)
         synonyms_list = dictionary.synonym(random_adjective)
@@ -648,8 +622,6 @@ class guessing_game2(Frame):
 
         c.create_text(945, 450, text=f'What is the opposite of {random_adjective2}?', font=("Comic Sans MS", 15))
 
-        # question4 = Label(c, text=f'Q4: What is the opposite of {random_adjective2}?')
-        # question4.pack()
         antonym_list = dictionary.antonym(random_adjective2)
         random_antonym = random.choice(antonym_list).translate(str.maketrans('', '', string.punctuation))
         m = IntVar()
@@ -667,12 +639,9 @@ class guessing_game2(Frame):
 
         c.create_text(965, 600, text=f'What is the singular noun of {random_noun}?', font=("Comic Sans MS", 15))
 
-        # question5 = Label(c, text=f'Q3: What is the singular noun of {random_noun}?')
-        # question5.pack()
         enter_question5 = Entry(c)
         enter_question5.place(x=850, y=650, height=40, width=300)
-        # noun_list=dictionary.singular(random_adjective2)
-        # random_antonym = random.choice(antonym_list)
+
         p = inflect.engine()
 
         def pop_up():
@@ -714,7 +683,7 @@ class guessing_game2(Frame):
             enter_question5.delete(0, 'end')
             score = 0
 
-        submit = Button(self, text="Submit", command=pop_up)
+        submit = Button(self, bg='#3f51b5', font='bold', text="Submit", command=pop_up)
         submit.place(x=925, y=725, height=45, width=150)
 
 
@@ -733,7 +702,7 @@ class guessing_game3(Frame):
         adjectives = []
         nouns = []
 
-        home = Button(c, text="Home Page", command=lambda: controller.show_frame(home_page))
+        home = Button(c,  bg='#3f51b5', font='bold',text="Home Page", command=lambda: controller.show_frame(home_page))
         home.place(x=283, y=725, height=45, width=150)
 
         S = Scrollbar(c)
@@ -747,7 +716,7 @@ class guessing_game3(Frame):
         T.place(x=150, y=70)
         T.insert(END, paragraphs_list3[0])
         S.config(command=T.yview)
-        T.config(yscrollcommand=S.set)
+        T.config(yscrollcommand=S.set, state=DISABLED)
 
         for i in paragraphs_list3[0].split():
             if spacy.explain(sp(i.lower())[0].tag_) == 'adjective':
@@ -771,8 +740,7 @@ class guessing_game3(Frame):
 
         c.create_text(985, 70, text='Enter a past tense verb from the above story', font=("Comic Sans MS", 15))
 
-        # question1=Label(c,text= 'Enter a past tense verb from the above story')
-        # question1.pack()
+
         enter_question1 = Entry(c)
         enter_question1.place(x=850, y=100, height=40, width=300)
         ###########QUESTION2##############
@@ -781,8 +749,7 @@ class guessing_game3(Frame):
         q2.place(x=1225, y=185, height=35, width=80)
 
         c.create_text(1000, 200, text='Enter a personal pronoun from the above story', font=("Comic Sans MS", 15))
-        # question2 = Label(c, text='Q2: Enter a personal pronoun from the above story')
-        # question2.pack()
+
         enter_question2 = Entry(c)
         enter_question2.place(x=850, y=225, height=40, width=300)
         ###########QUESTION3##############
@@ -792,8 +759,7 @@ class guessing_game3(Frame):
 
         c.create_text(925, 330, text=f'What is the meaning of {random_adjective}?', font=("Comic Sans MS", 15))
 
-        # question3 = Label(c, text=f'Q3: What is the meaning of {random_adjective}?')
-        # question3.pack()
+
         enter_question3 = Entry(c)
         enter_question3.place(x=850, y=350, height=40, width=300)
         synonyms_list = dictionary.synonym(random_adjective)
@@ -805,8 +771,6 @@ class guessing_game3(Frame):
 
         c.create_text(945, 450, text=f'What is the opposite of {random_adjective2}?', font=("Comic Sans MS", 15))
 
-        # question4 = Label(c, text=f'Q4: What is the opposite of {random_adjective2}?')
-        # question4.pack()
         antonym_list = dictionary.antonym(random_adjective2)
         random_antonym = random.choice(antonym_list).translate(str.maketrans('', '', string.punctuation))
         m = IntVar()
@@ -824,12 +788,10 @@ class guessing_game3(Frame):
 
         c.create_text(965, 600, text=f'What is the singular noun of {random_noun}?', font=("Comic Sans MS", 15))
 
-        # question5 = Label(c, text=f'Q3: What is the singular noun of {random_noun}?')
-        # question5.pack()
+
         enter_question5 = Entry(c)
         enter_question5.place(x=850, y=650, height=40, width=300)
-        # noun_list=dictionary.singular(random_adjective2)
-        # random_antonym = random.choice(antonym_list)
+
         p = inflect.engine()
 
         def pop_up():
@@ -871,7 +833,7 @@ class guessing_game3(Frame):
             enter_question5.delete(0, 'end')
             score = 0
 
-        submit = Button(self, text="Submit", command=pop_up)
+        submit = Button(self, bg='#3f51b5', font='bold', text="Submit", command=pop_up)
         submit.place(x=925, y=725, height=45, width=150)
 
 
@@ -890,7 +852,7 @@ class guessing_game4(Frame):
         adjectives = []
         nouns = []
 
-        home = Button(c, text="Home Page", command=lambda: controller.show_frame(home_page))
+        home = Button(c, bg='#3f51b5', font='bold', text="Home Page", command=lambda: controller.show_frame(home_page))
         home.place(x=283, y=725, height=45, width=150)
 
         S = Scrollbar(c)
@@ -904,7 +866,7 @@ class guessing_game4(Frame):
         T.place(x=150, y=70)
         T.insert(END, paragraphs_list4[0])
         S.config(command=T.yview)
-        T.config(yscrollcommand=S.set)
+        T.config(yscrollcommand=S.set, state=DISABLED)
 
         for i in paragraphs_list4[0].split():
             if spacy.explain(sp(i.lower())[0].tag_) == 'adjective':
@@ -928,8 +890,7 @@ class guessing_game4(Frame):
 
         c.create_text(985, 70, text='Enter a past tense verb from the above story', font=("Comic Sans MS", 15))
 
-        # question1=Label(c,text= 'Enter a past tense verb from the above story')
-        # question1.pack()
+
         enter_question1 = Entry(c)
         enter_question1.place(x=850, y=100, height=40, width=300)
         ###########QUESTION2##############
@@ -938,8 +899,7 @@ class guessing_game4(Frame):
         q2.place(x=1225, y=185, height=35, width=80)
 
         c.create_text(1000, 200, text='Enter a personal pronoun from the above story', font=("Comic Sans MS", 15))
-        # question2 = Label(c, text='Q2: Enter a personal pronoun from the above story')
-        # question2.pack()
+
         enter_question2 = Entry(c)
         enter_question2.place(x=850, y=225, height=40, width=300)
         ###########QUESTION3##############
@@ -949,8 +909,7 @@ class guessing_game4(Frame):
 
         c.create_text(925, 330, text=f'What is the meaning of {random_adjective}?', font=("Comic Sans MS", 15))
 
-        # question3 = Label(c, text=f'Q3: What is the meaning of {random_adjective}?')
-        # question3.pack()
+
         enter_question3 = Entry(c)
         enter_question3.place(x=850, y=350, height=40, width=300)
         synonyms_list = dictionary.synonym(random_adjective)
@@ -962,8 +921,6 @@ class guessing_game4(Frame):
 
         c.create_text(945, 450, text=f'What is the opposite of {random_adjective2}?', font=("Comic Sans MS", 15))
 
-        # question4 = Label(c, text=f'Q4: What is the opposite of {random_adjective2}?')
-        # question4.pack()
         antonym_list = dictionary.antonym(random_adjective2)
         random_antonym = random.choice(antonym_list).translate(str.maketrans('', '', string.punctuation))
         m = IntVar()
@@ -981,12 +938,10 @@ class guessing_game4(Frame):
 
         c.create_text(965, 600, text=f'What is the singular noun of {random_noun}?', font=("Comic Sans MS", 15))
 
-        # question5 = Label(c, text=f'Q3: What is the singular noun of {random_noun}?')
-        # question5.pack()
+
         enter_question5 = Entry(c)
         enter_question5.place(x=850, y=650, height=40, width=300)
-        # noun_list=dictionary.singular(random_adjective2)
-        # random_antonym = random.choice(antonym_list)
+
         p = inflect.engine()
 
         def pop_up():
@@ -1028,7 +983,7 @@ class guessing_game4(Frame):
             enter_question5.delete(0, 'end')
             score = 0
 
-        submit = Button(self, text="Submit", command=pop_up)
+        submit = Button(self, bg='#3f51b5', font='bold', text="Submit", command=pop_up)
         submit.place(x=925, y=725, height=45, width=150)
 
 
@@ -1094,8 +1049,4 @@ class File:
 if __name__ == '__main__':
     root = Little()
     root.title('Little Kiddie')
-    # # load = Image.open('images\\wireframes.jpg')
-    # # render = ImageTk.PhotoImage(load)
-    # # img = Label(root, image = render)
-    # # img.place(x = 0, y= 0)
     root.mainloop()
