@@ -119,7 +119,7 @@ class home_page(Frame):
         game.background = img_button6
 
         def callback_piano():
-            filename = 'rand.py'
+            filename = 'piano.py'
             os.system(filename)
 
         img_button7 = ImageTk.PhotoImage(
