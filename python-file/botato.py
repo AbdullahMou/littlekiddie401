@@ -419,12 +419,14 @@ class guessing_game1(Frame):
         T.config(yscrollcommand=S.set, state=DISABLED)
 
 
+
+
         for i in paragraphs_list1[0].split():
             if spacy.explain(sp(i.lower())[0].tag_) == 'adjective':
                 adjectives.append(i)
         random_adjective = random.choice(adjectives).translate(str.maketrans('', '', string.punctuation))
 
-        random_adjective2 = random.choice(adjectives)
+        random_adjective2 = random.choice(adjectives).translate(str.maketrans('', '', string.punctuation))
 
         for i in paragraphs_list1[0].split():
             if spacy.explain(sp(i.lower())[0].tag_) == 'noun, plural':
@@ -454,6 +456,21 @@ class guessing_game1(Frame):
         enter_question2 = Entry(c)
         enter_question2.place(x=850, y=225, height=40, width=300)
         ###########QUESTION3##############
+        T.tag_config(f' {random_adjective}', background='#FF80DF')
+        T.tag_config(f' {random_adjective2}', background='#99BBFF')
+
+        def search(text_widget, keyword, tag):
+            pos = '1.0'
+            while True:
+                idx = text_widget.search(keyword, pos, END)
+                if not idx:
+                    break
+                pos = '{}+{}c'.format(idx, len(keyword))
+                text_widget.tag_add(tag, idx, pos)
+
+        search(T, f' {random_adjective}', f' {random_adjective}')
+        search(T, f' {random_adjective2}', f' {random_adjective2}')
+
         sentence3 = f'question number 3 : What is the meaning of {random_adjective}?'
         q3 = Button(c, text="play audio", command=lambda: tts(sentence3))
         q3.place(x=1225, y=315, height=35, width=80)
@@ -464,6 +481,14 @@ class guessing_game1(Frame):
         enter_question3.place(x=850, y=350, height=40, width=300)
         synonyms_list = dictionary.synonym(random_adjective)
         random_synonym = random.choice(synonyms_list)
+        random_synonym2 = random.choice(synonyms_list)
+        def hint_pop_up():
+            messagebox.showinfo('Hint', f'The answer is {random_synonym2}')
+
+        img_button_hint = ImageTk.PhotoImage(Image.open('..\\images\\lightbulb.png').resize((45, 30), Image.ANTIALIAS))
+        hint_button = Button(c,bg='#dac7ff',bd=0, image=img_button_hint, command=hint_pop_up)
+        hint_button.place(x=800, y=352)
+        hint_button.background = img_button_hint
         ###########QUESTION4##############
         sentence4 = f'question number 4 : What is the opposite of {random_adjective2}?'
         q4 = Button(c, text="play audio", command=lambda: tts(sentence4))
@@ -472,12 +497,14 @@ class guessing_game1(Frame):
         c.create_text(945, 450, text=f'What is the opposite of {random_adjective2}?', font=("Comic Sans MS", 15))
 
         antonym_list = dictionary.antonym(random_adjective2)
+        syn_list = dictionary.synonym(random_adjective2)
         random_antonym = random.choice(antonym_list).translate(str.maketrans('', '', string.punctuation))
+        random_syn = random.choice(syn_list).translate(str.maketrans('', '', string.punctuation))
         m = IntVar()
         option1 = Radiobutton(c, text=f'(a){random_antonym}', variable=m, value=1, font=("Comic Sans MS", 12),
                               bg='#DAC7FF', selectcolor='#F9C6DE', activebackground='#F9C6DE', highlightcolor='#F9C6DE')
         option1.place(x=900, y=475)
-        option2 = Radiobutton(c, text=f'(b){random_synonym}', variable=m, value=2, font=("Comic Sans MS", 12),
+        option2 = Radiobutton(c, text=f'(b){random_syn}', variable=m, value=2, font=("Comic Sans MS", 12),
                               bg='#DAC7FF', selectcolor='#F9C6DE', activebackground='#F9C6DE', highlightcolor='#F9C6DE')
         option2.place(x=900, y=525)
 
@@ -605,6 +632,21 @@ class guessing_game2(Frame):
         enter_question2 = Entry(c)
         enter_question2.place(x=850, y=225, height=40, width=300)
         ###########QUESTION3##############
+        T.tag_config(f' {random_adjective}', background='#FF80DF')
+        T.tag_config(f' {random_adjective2}', background='#99BBFF')
+
+        def search(text_widget, keyword, tag):
+            pos = '1.0'
+            while True:
+                idx = text_widget.search(keyword, pos, END)
+                if not idx:
+                    break
+                pos = '{}+{}c'.format(idx, len(keyword))
+                text_widget.tag_add(tag, idx, pos)
+
+        search(T, f' {random_adjective}', f' {random_adjective}')
+        search(T, f' {random_adjective2}', f' {random_adjective2}')
+
         sentence3 = f'question number 3 : What is the meaning of {random_adjective}?'
         q3 = Button(c, text="play audio", command=lambda: tts(sentence3))
         q3.place(x=1225, y=315, height=35, width=80)
@@ -615,6 +657,14 @@ class guessing_game2(Frame):
         enter_question3.place(x=850, y=350, height=40, width=300)
         synonyms_list = dictionary.synonym(random_adjective)
         random_synonym = random.choice(synonyms_list)
+        random_synonym2 = random.choice(synonyms_list)
+        def hint_pop_up():
+            messagebox.showinfo('Hint', f'The answer is {random_synonym2}')
+
+        img_button_hint = ImageTk.PhotoImage(Image.open('..\\images\\lightbulb.png').resize((45, 30), Image.ANTIALIAS))
+        hint_button = Button(c,bg='#dac7ff',bd=0, image=img_button_hint, command=hint_pop_up)
+        hint_button.place(x=800, y=352)
+        hint_button.background = img_button_hint
         ###########QUESTION4##############
         sentence4 = f'question number 4 : What is the opposite of {random_adjective2}?'
         q4 = Button(c, text="play audio", command=lambda: tts(sentence4))
@@ -623,12 +673,14 @@ class guessing_game2(Frame):
         c.create_text(945, 450, text=f'What is the opposite of {random_adjective2}?', font=("Comic Sans MS", 15))
 
         antonym_list = dictionary.antonym(random_adjective2)
+        syn_list = dictionary.synonym(random_adjective2)
+        random_syn = random.choice(syn_list).translate(str.maketrans('', '', string.punctuation))
         random_antonym = random.choice(antonym_list).translate(str.maketrans('', '', string.punctuation))
         m = IntVar()
         option1 = Radiobutton(c, text=f'(a){random_antonym}', variable=m, value=1, font=("Comic Sans MS", 12),
                               bg='#DAC7FF', selectcolor='#F9C6DE', activebackground='#F9C6DE', highlightcolor='#F9C6DE')
         option1.place(x=900, y=475)
-        option2 = Radiobutton(c, text=f'(b){random_synonym}', variable=m, value=2, font=("Comic Sans MS", 12),
+        option2 = Radiobutton(c, text=f'(b){random_syn}', variable=m, value=2, font=("Comic Sans MS", 12),
                               bg='#DAC7FF', selectcolor='#F9C6DE', activebackground='#F9C6DE', highlightcolor='#F9C6DE')
         option2.place(x=900, y=525)
 
@@ -753,6 +805,21 @@ class guessing_game3(Frame):
         enter_question2 = Entry(c)
         enter_question2.place(x=850, y=225, height=40, width=300)
         ###########QUESTION3##############
+        T.tag_config(f' {random_adjective}', background='#FF80DF')
+        T.tag_config(f' {random_adjective2}', background='#99BBFF')
+
+        def search(text_widget, keyword, tag):
+            pos = '1.0'
+            while True:
+                idx = text_widget.search(keyword, pos, END)
+                if not idx:
+                    break
+                pos = '{}+{}c'.format(idx, len(keyword))
+                text_widget.tag_add(tag, idx, pos)
+
+        search(T, f' {random_adjective}', f' {random_adjective}')
+        search(T, f' {random_adjective2}', f' {random_adjective2}')
+
         sentence3 = f'question number 3 : What is the meaning of {random_adjective}?'
         q3 = Button(c, text="play audio", command=lambda: tts(sentence3))
         q3.place(x=1225, y=315, height=35, width=80)
@@ -764,6 +831,14 @@ class guessing_game3(Frame):
         enter_question3.place(x=850, y=350, height=40, width=300)
         synonyms_list = dictionary.synonym(random_adjective)
         random_synonym = random.choice(synonyms_list)
+        random_synonym2 = random.choice(synonyms_list)
+        def hint_pop_up():
+            messagebox.showinfo('Hint', f'The answer is {random_synonym2}')
+
+        img_button_hint = ImageTk.PhotoImage(Image.open('..\\images\\lightbulb.png').resize((45, 30), Image.ANTIALIAS))
+        hint_button = Button(c,bg='#dac7ff',bd=0, image=img_button_hint, command=hint_pop_up)
+        hint_button.place(x=800, y=352)
+        hint_button.background = img_button_hint
         ###########QUESTION4##############
         sentence4 = f'question number 4 : What is the opposite of {random_adjective2}?'
         q4 = Button(c, text="play audio", command=lambda: tts(sentence4))
@@ -772,12 +847,14 @@ class guessing_game3(Frame):
         c.create_text(945, 450, text=f'What is the opposite of {random_adjective2}?', font=("Comic Sans MS", 15))
 
         antonym_list = dictionary.antonym(random_adjective2)
+        syn_list = dictionary.synonym(random_adjective2)
+        random_syn = random.choice(syn_list).translate(str.maketrans('', '', string.punctuation))
         random_antonym = random.choice(antonym_list).translate(str.maketrans('', '', string.punctuation))
         m = IntVar()
         option1 = Radiobutton(c, text=f'(a){random_antonym}', variable=m, value=1, font=("Comic Sans MS", 12),
                               bg='#DAC7FF', selectcolor='#F9C6DE', activebackground='#F9C6DE', highlightcolor='#F9C6DE')
         option1.place(x=900, y=475)
-        option2 = Radiobutton(c, text=f'(b){random_synonym}', variable=m, value=2, font=("Comic Sans MS", 12),
+        option2 = Radiobutton(c, text=f'(b){random_syn}', variable=m, value=2, font=("Comic Sans MS", 12),
                               bg='#DAC7FF', selectcolor='#F9C6DE', activebackground='#F9C6DE', highlightcolor='#F9C6DE')
         option2.place(x=900, y=525)
 
@@ -903,6 +980,21 @@ class guessing_game4(Frame):
         enter_question2 = Entry(c)
         enter_question2.place(x=850, y=225, height=40, width=300)
         ###########QUESTION3##############
+        T.tag_config(f' {random_adjective}', background='#FF80DF')
+        T.tag_config(f' {random_adjective2}', background='#99BBFF')
+
+        def search(text_widget, keyword, tag):
+            pos = '1.0'
+            while True:
+                idx = text_widget.search(keyword, pos, END)
+                if not idx:
+                    break
+                pos = '{}+{}c'.format(idx, len(keyword))
+                text_widget.tag_add(tag, idx, pos)
+
+        search(T, f' {random_adjective}', f' {random_adjective}')
+        search(T, f' {random_adjective2}', f' {random_adjective2}')
+
         sentence3 = f'question number 3 : What is the meaning of {random_adjective}?'
         q3 = Button(c, text="play audio", command=lambda: tts(sentence3))
         q3.place(x=1225, y=315, height=35, width=80)
@@ -914,6 +1006,14 @@ class guessing_game4(Frame):
         enter_question3.place(x=850, y=350, height=40, width=300)
         synonyms_list = dictionary.synonym(random_adjective)
         random_synonym = random.choice(synonyms_list)
+        random_synonym2 = random.choice(synonyms_list)
+        def hint_pop_up():
+            messagebox.showinfo('Hint', f'The answer is {random_synonym2}')
+
+        img_button_hint = ImageTk.PhotoImage(Image.open('..\\images\\lightbulb.png').resize((45, 30), Image.ANTIALIAS))
+        hint_button = Button(c,bg='#dac7ff',bd=0, image=img_button_hint, command=hint_pop_up)
+        hint_button.place(x=800, y=352)
+        hint_button.background = img_button_hint
         ###########QUESTION4##############
         sentence4 = f'question number 4 : What is the opposite of {random_adjective2}?'
         q4 = Button(c, text="play audio", command=lambda: tts(sentence4))
@@ -922,12 +1022,14 @@ class guessing_game4(Frame):
         c.create_text(945, 450, text=f'What is the opposite of {random_adjective2}?', font=("Comic Sans MS", 15))
 
         antonym_list = dictionary.antonym(random_adjective2)
+        syn_list = dictionary.synonym(random_adjective2)
+        random_syn = random.choice(syn_list).translate(str.maketrans('', '', string.punctuation))
         random_antonym = random.choice(antonym_list).translate(str.maketrans('', '', string.punctuation))
         m = IntVar()
         option1 = Radiobutton(c, text=f'(a){random_antonym}', variable=m, value=1, font=("Comic Sans MS", 12),
                               bg='#DAC7FF', selectcolor='#F9C6DE', activebackground='#F9C6DE', highlightcolor='#F9C6DE')
         option1.place(x=900, y=475)
-        option2 = Radiobutton(c, text=f'(b){random_synonym}', variable=m, value=2, font=("Comic Sans MS", 12),
+        option2 = Radiobutton(c, text=f'(b){random_syn}', variable=m, value=2, font=("Comic Sans MS", 12),
                               bg='#DAC7FF', selectcolor='#F9C6DE', activebackground='#F9C6DE', highlightcolor='#F9C6DE')
         option2.place(x=900, y=525)
 
@@ -1004,14 +1106,23 @@ class song_page(Frame):
 
         def pause():
             pygame.mixer.music.pause()
+            button_pause = ImageTk.PhotoImage(Image.open('..\\images\\play.png').resize((70, 70), Image.ANTIALIAS))
+            b_pause = Button(c, image=button_pause, command=lambda: unpause(), bg='#abd4f6', bd=0)
+            b_pause.place(x=650, y=650)
+            b_pause.background = button_pause
 
         def stop():
             pygame.mixer.music.stop()
 
         def unpause():
             pygame.mixer.music.unpause()
+            button_unpause = ImageTk.PhotoImage(Image.open('..\\images\\pause.png').resize((70, 70), Image.ANTIALIAS))
+            b_unpause = Button(c, image=button_unpause, command=lambda: pause(), bg='#abd4f6', bd=0)
+            b_unpause.place(x=650, y=650)
+            b_unpause.background = button_unpause
+
         c.pack(fill=BOTH, anchor='nw', expand=True)
-        img = ImageTk.PhotoImage(Image.open('..\\images\\songs.gif').resize((1540, 800), Image.ANTIALIAS))
+        img = ImageTk.PhotoImage(Image.open('..\\images\\songs_back.png').resize((1540, 800), Image.ANTIALIAS))
         c.background = img
         bg = c.create_image(0, 0, anchor=NW, image=img)
         button1 = ImageTk.PhotoImage(Image.open('..\\images\\1.png').resize((200, 200), Image.ANTIALIAS))
@@ -1066,18 +1177,14 @@ class song_page(Frame):
 
         buttonstop = ImageTk.PhotoImage(Image.open('..\\images\\stop.png').resize((70, 70), Image.ANTIALIAS))
         b_stop = Button(c, image=buttonstop, command=lambda: stop(), bg='#abd4f6', bd=0)
-        b_stop.place(x=880, y=650)
+        b_stop.place(x=820, y=650)
         b_stop.background = buttonstop
+
 
         button_unpause = ImageTk.PhotoImage(Image.open('..\\images\\pause.png').resize((70, 70), Image.ANTIALIAS))
         b_unpause = Button(c, image=button_unpause, command=lambda: pause(), bg='#abd4f6', bd=0)
-        b_unpause.place(x=728, y=650)
+        b_unpause.place(x=650, y=650)
         b_unpause.background = button_unpause
-
-        button_pause = ImageTk.PhotoImage(Image.open('..\\images\\play.png').resize((70, 70), Image.ANTIALIAS))
-        b_pause = Button(c, image=button_pause, command=lambda: unpause(), bg='#abd4f6', bd=0)
-        b_pause.place(x=576, y=650)
-        b_pause.background = button_pause
 
         home = Button(c, text="Home Page", height=2, width=10, bg='#3085D1',
                       command=lambda: controller.show_frame(home_page) , font = ' bold')
